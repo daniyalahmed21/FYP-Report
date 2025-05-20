@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Guide: AI Crypto Trading Bot FYP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Visualization & Content Choices:
+        - Report Introduction (I): Goal: Inform. Method: Text summary. Interaction: Static. Justification: Sets context. Library: HTML.
+        - Conceptual Foundations (II): Goal: Inform, Organize. Method: Text summaries, HTML/CSS diagram for Architecture. Interaction: Click to expand details. Justification: Clarifies core ideas. Library: HTML.
+        - Selecting Cryptos/Exchanges (III): Goal: Compare, Inform. Method: Interactive HTML table for exchanges, text for crypto selection. Interaction: Table filtering/sorting (conceptual, implemented as show/hide details). Justification: Aids decision-making. Library: HTML, JS.
+        - Tech Stack (IV): Goal: Inform, Organize. Method: Lists for Python/libraries, interactive table for data sources, comparison for backtesting frameworks. Interaction: Clickable items. Justification: Details tools. Library: HTML, JS, Chart.js for data source comparison (e.g. granularity availability).
+        - AI/DS Integration (V): Goal: Inform, Explain. Method: Text explanations, HTML/CSS flow for data preprocessing. Interaction: Step-by-step display. Justification: Clarifies complex processes. Library: HTML, JS.
+        - Development/Implementation (VI): Goal: Explain. Method: Text, code snippets (as text). Interaction: Toggle code visibility. Justification: Shows practical application. Library: HTML, JS.
+        - Testing/Validation (VII): Goal: Inform, Compare. Method: Text, interactive table for performance metrics, Chart.js for sample metric visualization (e.g., hypothetical Sharpe Ratios). Interaction: Click to see metric details. Justification: Highlights evaluation. Library: HTML, JS, Chart.js.
+        - Budgeting (VIII): Goal: Compare, Inform. Method: Interactive HTML table for cost breakdown. Interaction: Clickable rows. Justification: Practical financial guidance. Library: HTML, JS.
+        - Risk Management (IX): Goal: Inform, Organize. Method: Lists, text explanations. Interaction: Expandable sections. Justification: Emphasizes safety. Library: HTML, JS.
+        - Development Roadmap (X): Goal: Organize, Inform. Method: Interactive HTML/CSS/JS timeline/stepper. Interaction: Click steps to see details. Justification: Provides project plan. Library: HTML, JS.
+        - Challenges/Future Work (XI): Goal: Inform. Method: Lists, text. Interaction: Static. Justification: Sets realistic expectations. Library: HTML.
+        - Conclusion (XII): Goal: Summarize. Method: Text. Interaction: Static. Justification: Reinforces key takeaways. Library: HTML.
+        - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. All diagrams are HTML/CSS based. Charts use Chart.js (Canvas).
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdfbf7; /* Warm off-white */
+            color: #3f3c36; /* Dark warm gray for text */
+        }
+        .sidebar {
+            background-color: #e8e5df; /* Lighter warm gray */
+            border-right: 1px solid #dcd8d0; /* Subtle border */
+        }
+        .sidebar a {
+            color: #5c5850; /* Muted warm gray for nav links */
+            transition: all 0.3s ease;
+        }
+        .sidebar a:hover, .sidebar a.active {
+            background-color: #008080; /* Muted Teal for hover/active */
+            color: #fdfbf7;
+            transform: translateX(2px);
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .card {
+            background-color: #fff;
+            border: 1px solid #e8e5df;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .table th, .table td {
+            border-color: #e8e5df;
+        }
+        .table th {
+            background-color: #f7f5f2; /* Very light warm gray for table headers */
+        }
+        .btn-primary {
+            background-color: #008080; /* Muted Teal */
+            color: #fdfbf7;
+        }
+        .btn-primary:hover {
+            background-color: #006666; /* Darker Teal */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        /* Timeline specific styles */
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+            padding-left: 2.5rem; /* Space for icon and line */
+        }
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+        .timeline-item::before { /* Vertical line */
+            content: '';
+            position: absolute;
+            left: 0.625rem; /* 10px / 16px = 0.625rem, adjust to center with icon */
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #008080; /* Muted Teal */
+        }
+        .timeline-item:last-child::before {
+            height: 0.75rem; /* Stop line before end of last item text */
+        }
+        .timeline-icon {
+            position: absolute;
+            left: 0;
+            top: 0.25rem; /* Adjust to align with text */
+            width: 1.25rem; /* 20px */
+            height: 1.25rem; /* 20px */
+            border-radius: 50%;
+            background-color: #008080; /* Muted Teal */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.75rem;
+        }
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+
+    <aside class="sidebar w-64 min-h-screen p-4 space-y-2 overflow-y-auto">
+        <h1 class="text-2xl font-bold mb-6 text-center text-[#006666]">Crypto Bot FYP</h1>
+        <nav id="navigation" class="space-y-1">
+            <a href="#introduction" class="block py-2.5 px-4 rounded-lg">I. Introduction</a>
+            <a href="#conceptual-foundations" class="block py-2.5 px-4 rounded-lg">II. Conceptual Foundations</a>
+            <a href="#selection-crypto-exchange" class="block py-2.5 px-4 rounded-lg">III. Selecting Cryptos & Exchanges</a>
+            <a href="#tech-stack" class="block py-2.5 px-4 rounded-lg">IV. Tech Stack on a Budget</a>
+            <a href="#ai-ds-integration" class="block py-2.5 px-4 rounded-lg">V. AI/DS Integration</a>
+            <a href="#dev-implementation" class="block py-2.5 px-4 rounded-lg">VI. Development & Implementation</a>
+            <a href="#testing-validation" class="block py-2.5 px-4 rounded-lg">VII. Testing & Validation</a>
+            <a href="#budgeting" class="block py-2.5 px-4 rounded-lg">VIII. Budgeting Your FYP</a>
+            <a href="#risk-management" class="block py-2.5 px-4 rounded-lg">IX. Essential Risk Management</a>
+            <a href="#dev-roadmap" class="block py-2.5 px-4 rounded-lg">X. Phased Development Roadmap</a>
+            <a href="#challenges-future" class="block py-2.5 px-4 rounded-lg">XI. Challenges & Future Work</a>
+            <a href="#conclusion" class="block py-2.5 px-4 rounded-lg">XII. Conclusion & Recommendations</a>
+        </nav>
+    </aside>
+
+    <main class="flex-1 p-6 lg:p-10 overflow-y-auto">
+        <section id="introduction" class="content-section">
+            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">I. Introduction: Navigating Your Crypto Trading Bot FYP</h2>
+            <div class="space-y-4 text-lg leading-relaxed card p-6 rounded-lg">
+                <p>Welcome to the interactive guide for developing an AI-powered cryptocurrency trading bot for your Final Year Project (FYP). This application translates the comprehensive report into an easily digestible format, helping you navigate the complexities of this ambitious yet rewarding endeavor.</p>
+                <p>The primary goal of such an FYP is a profound learning experience, culminating in a robustly designed, well-implemented, and thoroughly tested trading system. While profitability is an aspiration, the academic focus is on the engineering principles, design choices, and the demonstration of a functional bot. This guide will walk you through conceptualization, technology selection, AI integration, testing, budgeting, and risk management, all tailored for a student project context.</p>
+                <p>Use the navigation on the left to explore different sections. Each part of this guide aims to provide clear, actionable insights to support your FYP journey.</p>
+            </div>
+        </section>
+
+        <section id="conceptual-foundations" class="content-section">
+            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">II. Conceptual Foundations for Your Trading Bot</h2>
+            <div class="space-y-6">
+                <article class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">A. Defining the Bot's Purpose and Scope</h3>
+                    <p class="mb-2 text-lg leading-relaxed">This section helps you define a clear, narrow objective for your FYP bot. A focused approach is crucial for success. Consider what specific trading concept your bot will implement or what market hypothesis it will test. The key is to manage expectations and prioritize learning and a functional, well-documented system over guaranteed profits.</p>
+                    <p class="text-md text-gray-600">Key questions to address: Target cryptocurrencies, target exchange, core trading logic, and FYP success metrics (beyond profit).</p>
+                </article>
+
+                <article class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">B. Core Architecture</h3>
+                    <p class="mb-4 text-lg leading-relaxed">A modular architecture is highly recommended for an FYP. This allows for phased development, easier debugging, and component flexibility. This section outlines the typical components of an AI trading bot and their interactions.</p>
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <h4 class="text-xl font-semibold mb-3 text-center text-gray-700">Bot Architecture Modules</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-center">
+                            <div class="p-3 bg-teal-50 rounded-md shadow-sm border border-teal-200">
+                                <span class="text-2xl">📥</span>
+                                <p class="font-semibold mt-1 text-teal-700">Data Ingestion</p>
+                                <p class="text-xs text-gray-600">Acquires historical & real-time market data.</p>
+                            </div>
+                            <div class="p-3 bg-teal-50 rounded-md shadow-sm border border-teal-200">
+                                <span class="text-2xl">🧠</span>
+                                <p class="font-semibold mt-1 text-teal-700">Strategy & Signal Generation</p>
+                                <p class="text-xs text-gray-600">Houses trading logic, processes data, generates signals.</p>
+                            </div>
+                            <div class="p-3 bg-teal-50 rounded-md shadow-sm border border-teal-200">
+                                <span class="text-2xl">⚙️</span>
+                                <p class="font-semibold mt-1 text-teal-700">Order Execution</p>
+                                <p class="text-xs text-gray-600">Interfaces with exchange API to place orders.</p>
+                            </div>
+                            <div class="p-3 bg-teal-50 rounded-md shadow-sm border border-teal-200">
+                                <span class="text-2xl">🛡️</span>
+                                <p class="font-semibold mt-1 text-teal-700">Risk Management</p>
+                                <p class="text-xs text-gray-600">Implements rules to manage and mitigate losses.</p>
+                            </div>
+                            <div class="p-3 bg-gray-100 rounded-md shadow-sm border border-gray-300">
+                                <span class="text-2xl">🖥️</span>
+                                <p class="font-semibold mt-1 text-gray-700">(Optional) User Interface</p>
+                                <p class="text-xs text-gray-600">CLI or simple web dashboard for monitoring.</p>
+                            </div>
+                             <div class="p-3 bg-gray-100 rounded-md shadow-sm border border-gray-300">
+                                <span class="text-2xl">📜</span>
+                                <p class="font-semibold mt-1 text-gray-700">Logging & Monitoring</p>
+                                <p class="text-xs text-gray-600">Essential for debugging and performance tracking.</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">C. Overview of Achievable Trading Strategies</h3>
+                    <p class="mb-2 text-lg leading-relaxed">Selecting an appropriate strategy is critical. It should be understandable, implementable, testable, and offer clear learning outcomes. This section explores strategies suitable for an FYP, emphasizing that a well-implemented simple strategy is better than a poorly executed complex one.</p>
+                    <ul class="list-disc list-inside space-y-1 text-gray-700">
+                        <li>Technical Indicator-Based (e.g., MA Crossover, RSI Mean Reversion)</li>
+                        <li>Simple AI/ML-Driven (e.g., Predictive Model for Trend Confirmation, Sentiment Analysis Overlay)</li>
+                        <li>Advanced/Optional (e.g., Arbitrage, Grid Trading - consider complexity carefully)</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section id="selection-crypto-exchange" class="content-section">
+            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">III. Selecting Cryptocurrencies and Exchange Platforms</h2>
+            <div class="space-y-6">
+                <article class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">A. Choosing Suitable Cryptocurrencies</h3>
+                    <p class="mb-2 text-lg leading-relaxed">Focus on major cryptocurrencies or well-established altcoins for better data availability, liquidity, and more reliable API support. This section highlights criteria like liquidity, volatility, data access, and exchange support.</p>
+                    <p class="font-semibold">Recommended for FYP:</p>
+                    <ul class="list-disc list-inside space-y-1 text-gray-700">
+                        <li>Bitcoin (BTC), Ethereum (ETH)</li>
+                        <li>Major Altcoins (1-2): Cardano (ADA), Polygon (MATIC), Solana (SOL), Chainlink (LINK), Polkadot (DOT)</li>
+                        <li>Avoid: Very low-cap or "meme" coins due to poor liquidity and manipulation risks.</li>
+                    </ul>
+                </article>
+
+                <article class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">B. Exchange APIs for Students</h3>
+                    <p class="mb-4 text-lg leading-relaxed">The right exchange API is fundamental. Look for comprehensive functionality, Python SDKs, a Testnet environment, clear documentation, and reasonable rate limits. This section compares Binance, Kraken, and Bybit based on these criteria for an FYP context.</p>
+                    <div class="overflow-x-auto">
+                        <table id="exchangeComparisonTable" class="min-w-full table-auto text-sm rounded-lg shadow">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-700">Feature</th>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-700">Binance</th>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-700">Kraken</th>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-700">Bybit</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                </tbody>
+                        </table>
+                    </div>
+                    <p class="mt-4 text-sm text-gray-600"><strong>Note:</strong> Always consult the latest official API documentation from any exchange. Binance often emerges as a strong candidate for spot trading FYPs due to its Spot Testnet and documentation. Testnet data may not perfectly replicate live conditions.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="tech-stack" class="content-section">
+            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">IV. Building Your Tech Stack on a Budget</h2>
+            <div class="space-y-6">
+                <article class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">A. Python: The Language of Choice</h3>
+                    <p class="text-lg leading-relaxed">Python is predominant for algo trading and AI due to its extensive libraries, large community, readability, and suitability for data science. Use a recent version (e.g., 3.8+).</p>
+                </article>
+                <article class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">B. Essential Libraries</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700 columns-1 md:columns-2">
+                        <li>Pandas (Data manipulation)</li>
+                        <li>NumPy (Numerical computing)</li>
+                        <li>Scikit-learn (Classical ML)</li>
+                        <li>TA-Lib / Pandas-TA (Technical indicators)</li>
+                        <li>Matplotlib / Plotly / Bokeh (Visualization)</li>
+                        <li>TensorFlow/Keras or PyTorch (Deep learning)</li>
+                        <li>Requests / AIOHTTP (API calls)</li>
+                        <li>Websockets-client (Real-time data)</li>
+                    </ul>
+                    <p class="mt-3 text-sm text-gray-600">Use virtual environments (venv, conda) and a `requirements.txt` file for dependency management.</p>
+                </article>
+                <article class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">C. Data Acquisition Strategies</h3>
+                    <p class="mb-2 text-lg leading-relaxed">Focus on free data sources. This section outlines how to access historical OHLCV data and real-time data via WebSockets, emphasizing data quality and API rate limits.</p>
+                    <div class="chart-container my-4">
+                        <canvas id="dataSourcesChart"></canvas>
+                    </div>
+                    <p class="text-sm text-gray-600">The chart above illustrates common free historical data sources and typical granularities. A hybrid approach (bulk downloads + API for recent data) is often effective.</p>
+                </article>
+                 <article class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">D. Backtesting Frameworks</h3>
+                    <p class="mb-2 text-lg leading-relaxed">Frameworks like Backtesting.py and Freqtrade save development time. This section compares them based on ease of use and custom data integration.</p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="border p-4 rounded-md bg-gray-50">
+                            <h4 class="font-semibold text-teal-700">Backtesting.py</h4>
+                            <p class="text-sm text-gray-600">Lightweight, Pandas-friendly, good for custom strategy logic. Expects Pandas DataFrame input.</p>
+                        </div>
+                        <div class="border p-4 rounded-md bg-gray-50">
+                            <h4 class="font-semibold text-teal-700">Freqtrade</h4>
+                            <p class="text-sm text-gray-600">Comprehensive bot framework, supports live/paper trading. Has own data download/management. Custom CSVs might need conversion.</p>
+                        </div>
+                    </div>
+                </article>
+                <article class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">E. Development Environment</h3>
+                     <ul class="list-disc list-inside space-y-1 text-gray-700">
+                        <li>IDEs: VS Code, PyCharm (Community Edition)</li>
+                        <li>Version Control: Git & GitHub/GitLab</li>
+                        <li>Virtual Environments: venv, conda (essential for dependency management)</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section id="ai-ds-integration" class="content-section">
+            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">V. Integrating Artificial Intelligence and Data Science</h2>
+             <div class="space-y-6">
+                <article class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">A. Data Preprocessing</h3>
+                    <p class="mb-2 text-lg leading-relaxed">Raw financial data needs significant preprocessing. "Garbage in, garbage out" applies. This section covers handling missing values, outlier detection, and data transformation/standardization (scaling), all while avoiding lookahead bias.</p>
+                    <ol class="list-decimal list-inside space-y-1 text-gray-700">
+                        <li>Handling Missing Values (ffill, bfill, interpolation)</li>
+                        <li>Outlier Detection & Treatment (Z-score, IQR, capping)</li>
+                        <li>Data Transformation & Standardization (Timestamps to UTC, Feature Scaling - Standardization, Min-Max, Robust Scaling)</li>
+                    </ol>
+                </article>
+                <article class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">B. Feature Engineering</h3>
+                    <p class="mb-2 text-lg leading-relaxed">Create new, informative features from raw data to enhance AI model performance. Start with established technical indicators.</p>
+                    <ul class="list-disc list-inside space-y-1 text-gray-700">
+                        <li>Calculating Technical Indicators (SMAs, EMAs, MACD, RSI, Bollinger Bands, ATR using `pandas-ta`)</li>
+                        <li>Price and Volume Transformations (Log Returns, Price Differences, Volatility Measures, Volume Features)</li>
+                        <li>(Optional for FYP) On-Chain Data (Access can be challenging/costly for free tiers)</li>
+                        <li>(Optional for FYP) Basic Sentiment Analysis from News (Using free news APIs like Newsdata.io, APITube.io and NLP techniques like VADER)</li>
+                    </ul>
+                </article>
+                <article class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">C. AI-Driven Decision Making</h3>
+                    <p class="mb-2 text-lg leading-relaxed">Use AI to enhance a simpler base strategy. This section discusses predictive models (classical ML like Logistic Regression, SVMs; Deep Learning like LSTMs) and an introduction to Reinforcement Learning (RL) concepts (Q-Learning, Policy Gradients).</p>
+                    <p class="text-sm text-gray-600">For an FYP, a simple LSTM for trend confirmation is a practical AI integration. RL is more advanced and computationally intensive.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="dev-implementation" class="content-section">
+            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">VI. Developing and Implementing Trading Logic</h2>
+            <div class="space-y-6">
+                <article class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">A. Implementing a Chosen Strategy</h3>
+                    <p class="mb-2 text-lg leading-relaxed">Translate conceptual strategy rules (e.g., MA Crossover, RSI-based Mean Reversion) into precise Python code. Define clear buy/sell/hold conditions, calculate indicators, and manage bot state.</p>
+                    <pre class="bg-gray-800 text-white p-3 rounded-md text-sm overflow-x-auto"><code># Example: MA Crossover Buy Signal Logic (Conceptual)
+# sma_short_current, sma_long_current = calculate_smas(current_data)
+# sma_short_previous, sma_long_previous = calculate_smas(previous_data)
+
+# if sma_short_current > sma_long_current and sma_short_previous <= sma_long_previous:
+#     GENERATE_BUY_SIGNAL()</code></pre>
+                </article>
+                <article class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">B. Integrating AI/DS Insights</h3>
+                    <p class="mb-2 text-lg leading-relaxed">Use AI model outputs (e.g., LSTM trend prediction, sentiment score) as filters, confirmations, or modulators for the primary strategy.</p>
+                     <pre class="bg-gray-800 text-white p-3 rounded-md text-sm overflow-x-auto"><code># Example: AI Integration (Conceptual)
+# if (MA_Crossover_BUY_SIGNAL) and (LSTM_Trend_Prediction == "UP"):
+#     EXECUTE_BUY_ORDER()</code></pre>
+                </article>
+                <article class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">C. Crafting Order Execution Logic</h3>
+                    <p class="mb-2 text-lg leading-relaxed">Interact with the exchange API (using SDKs) to place, monitor, and manage orders (Market vs. Limit). Implement robust error handling for API calls and manage order status and positions.</p>
+                    <p class="text-sm text-gray-600">Crucial: Handle errors like insufficient balance, invalid parameters, rate limits, and connectivity issues gracefully.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="testing-validation" class="content-section">
+            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">VII. Testing, Validation, and Performance Measurement</h2>
+            <div class="space-y-6">
+                <article class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">A. Rigorous Backtesting</h3>
+                    <p class="mb-2 text-lg leading-relaxed">Simulate your strategy on historical data using frameworks like Backtesting.py or Freqtrade. Incorporate realistic assumptions (transaction costs, slippage) and avoid lookahead bias. Test across varied market conditions.</p>
+                </article>
+                <article class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">B. Key Performance Metrics</h3>
+                    <p class="mb-2 text-lg leading-relaxed">Evaluate strategy performance comprehensively, not just on total profit. This section details profitability, risk-adjusted return, and risk metrics.</p>
+                    <div class="overflow-x-auto mb-4">
+                        <table id="performanceMetricsTable" class="min-w-full table-auto text-sm rounded-lg shadow">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-700">Metric</th>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-700">Definition</th>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-700">Why it Matters for FYP</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                </tbody>
+                        </table>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="sampleMetricsChart"></canvas>
+                    </div>
+                    <p class="mt-2 text-sm text-gray-600">The chart above shows hypothetical Sharpe Ratios for different strategy variations as an example of visualizing performance metrics.</p>
+                </article>
+                <article class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">C. Paper Trading in Sandbox Environments</h3>
+                    <p class="mb-2 text-lg leading-relaxed">Run your bot with virtual funds on an exchange Testnet (Binance Spot Testnet, Bybit Testnet, Kraken Demo - verify spot availability for Kraken). This validates end-to-end functionality and helps identify real-world issues.</p>
+                </article>
+                <article class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">D. Iterative Refinement</h3>
+                    <p class="text-lg leading-relaxed">Analyze testing outcomes, identify weaknesses, adjust strategy/code, and re-test. Document all changes and their impact. This iterative process is key for an FYP.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="budgeting" class="content-section">
+            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">VIII. Budgeting Your FYP: Maximizing Resources, Minimizing Costs</h2>
+            <div class="space-y-6">
+                <article class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">A. Identifying Potential Expenses (and how to avoid them for FYP)</h3>
+                    <p class="mb-2 text-lg leading-relaxed">While professional bots incur costs (data APIs, hosting, etc.), an FYP can be near-zero budget by leveraging free resources. This section highlights potential industry costs and their free FYP alternatives.</p>
+                </article>
+                <article class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">B. Cost-Saving Strategies for an FYP</h3>
+                    <div class="overflow-x-auto">
+                        <table id="costSavingTable" class="min-w-full table-auto text-sm rounded-lg shadow">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-700">Expense Category</th>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-700">FYP Frugal Alternative</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                </tbody>
+                        </table>
+                    </div>
+                    <p class="mt-3 text-sm text-gray-600">Key strategies: Use free exchange APIs, open-source data (CryptoDataDownload, data.binance.vision), open-source software (Python, Pandas, Freqtrade, etc.), student cloud credits (Azure, AWS, GCP if needed), start with simpler models, and prioritize local development.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="risk-management" class="content-section">
+            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">IX. Essential Risk Management for Your Bot</h2>
+            <div class="space-y-6">
+                <article class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">A. Implementing Stop-Loss (SL) and Take-Profit (TP) Orders</h3>
+                    <p class="text-lg leading-relaxed">Fundamental tools to limit losses and lock in profits on individual trades. Set SL/TP levels based on volatility (ATR), support/resistance, fixed percentage, or risk/reward ratios.</p>
+                </article>
+                <article class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">B. Basic Position Sizing Rules</h3>
+                    <p class="text-lg leading-relaxed">Determine capital allocation per trade. The "1% or 2% Rule" (risking a small fixed percentage of total capital) is a common approach. Avoid over-leveraging if paper trading futures.</p>
+                </article>
+                <article class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">C. Addressing Bot-Specific Risks</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li><strong>Overfitting to Historical Data:</strong> Mitigate with out-of-sample testing, cross-validation, and paper trading.</li>
+                        <li><strong>API Key Security:</strong> NEVER hardcode keys. Use environment variables or secure config files. Restrict permissions.</li>
+                        <li><strong>Technical Glitches/Failures:</strong> Implement robust error handling, logging, and potentially heartbeat mechanisms.</li>
+                        <li><strong>Market Volatility/Flash Crashes:</strong> Use SL orders, consider "circuit breaker" logic.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section id="dev-roadmap" class="content-section">
+            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">X. Phased Development Roadmap for Your FYP</h2>
+            <p class="mb-6 text-lg leading-relaxed card p-6 rounded-lg">A phased approach breaks down the project into manageable stages. This interactive timeline outlines a logical progression from setup to final reporting. Click on each phase to see more details.</p>
+            <div id="roadmapContainer" class="space-y-4">
+                </div>
+        </section>
+
+        <section id="challenges-future" class="content-section">
+            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">XI. Challenges, Limitations, and Future Work</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <article class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">A. Common Challenges & Limitations</h3>
+                    <ul class="list-disc list-inside space-y-1 text-gray-700">
+                        <li>Market Volatility & Unpredictability</li>
+                        <li>Data Quality & Availability (gaps, rate limits, survivorship bias, testnet imperfections)</li>
+                        <li>Technical Complexity & Scope Creep</li>
+                        <li>Overfitting Strategies & Models</li>
+                        <li>Computational Resources for Advanced AI</li>
+                        <li>API Key Security</li>
+                        <li>Time Constraints of an FYP</li>
+                        <li>"No Guaranteed Profit" Reality</li>
+                    </ul>
+                </article>
+                <article class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">B. Potential Future Work (Beyond FYP)</h3>
+                     <ul class="list-disc list-inside space-y-1 text-gray-700">
+                        <li>More Sophisticated AI/ML Models (Transformers, advanced RL)</li>
+                        <li>Expanded Data Sources (premium news, on-chain data)</li>
+                        <li>Advanced Risk Management (dynamic position sizing)</li>
+                        <li>High-Frequency Trading Capabilities</li>
+                        <li>Multi-Exchange Arbitrage</li>
+                        <li>Enhanced UI/UX</li>
+                        <li>Live Trading Deployment (with extreme caution)</li>
+                        <li>Strategy Diversification</li>
+                        <li>Formal Quantitative Analysis</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section id="conclusion" class="content-section">
+            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">XII. Conclusion and Recommendations</h2>
+            <div class="space-y-4 text-lg leading-relaxed card p-6 rounded-lg">
+                <p>This guide provides a comprehensive roadmap for your AI crypto trading bot FYP. The journey is challenging but offers exceptional learning at the intersection of finance, CS, and AI.</p>
+                <h4 class="text-xl font-medium mt-4 mb-2 text-[#008080]">Key Recommendations:</h4>
+                <ul class="list-decimal list-inside space-y-2 text-gray-700">
+                    <li>Prioritize Learning & Realistic Scope.</li>
+                    <li>Embrace Open-Source & Free Tiers.</li>
+                    <li>Adopt Structured, Phased Development.</li>
+                    <li>Understand Data is Foundational (quality, preprocessing, no lookahead bias).</li>
+                    <li>Start with Simple, Understandable Strategies; enhance with AI.</li>
+                    <li>Conduct Rigorous Testing (Backtesting & Paper Trading).</li>
+                    <li>Implement Robust Risk Management.</li>
+                    <li>Secure API Keys Diligently.</li>
+                    <li>Document Thoroughly (code and report).</li>
+                    <li>Select Appropriate Tools (cryptos, exchanges, frameworks).</li>
+                </ul>
+                <p>Focus on the process, technical execution, and depth of analysis for a successful academic endeavor.</p>
+            </div>
+        </section>
+    </main>
+
+<script>
+    const navLinks = document.querySelectorAll('#navigation a');
+    const contentSections = document.querySelectorAll('.content-section');
+
+    function navigateToSection(hash) {
+        navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === hash);
+        });
+        contentSections.forEach(section => {
+            section.classList.toggle('active', section.id === hash.substring(1));
+        });
+        if (hash === '#tech-stack') initDataSourcesChart();
+        if (hash === '#testing-validation') initSampleMetricsChart();
+    }
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const targetId = link.getAttribute('href');
+            window.location.hash = targetId;
+        });
+    });
+
+    window.addEventListener('hashchange', () => {
+        const hash = window.location.hash || '#introduction';
+        navigateToSection(hash);
+    });
+
+    // Initial page load
+    const initialHash = window.location.hash || '#introduction';
+    navigateToSection(initialHash);
+
+    // Data for tables
+    const exchangeData = [
+        { feature: 'Python SDK', binance: 'Official & python-binance', kraken: 'krakenapi.py, python-kraken-sdk', bybit: 'pybit' },
+        { feature: 'Historical Data (Spot Klines)', binance: 'API, data.binance.vision', kraken: 'API, CSV downloads', bybit: 'API (V5)' },
+        { feature: 'Spot Testnet', binance: 'Yes, Clear', kraken: 'Futures Demo primarily, Spot API unclear', bybit: 'Yes, Supports Spot' },
+        { feature: 'Testnet Historical Data', binance: 'Yes', kraken: 'Unclear for Spot', bybit: 'Yes' },
+        { feature: 'Rate Limits Info (Klines)', binance: 'Request Weight system', kraken: 'General API limits', bybit: 'UID-based, General IP limits' },
+        { feature: 'Ease for FYP (Spot)', binance: 'Good docs, widely used', kraken: 'Good rep, CSVs helpful, Spot testnet concern', bybit: 'Good SDK, Testnet supports spot' }
+    ];
+
+    const performanceMetricsData = [
+        { metric: 'Total P&L', definition: 'Net profit or loss after all trades and costs.', why: 'Basic measure of overall profitability.' },
+        { metric: 'Profit Factor', definition: 'Gross profit divided by gross loss.', why: 'Indicates efficiency; >1 is profitable, >1.5 often good.' },
+        { metric: 'Win Rate', definition: 'Percentage of trades that were profitable.', why: 'Shows consistency of wins, but must be seen with avg win/loss size.' },
+        { metric: 'Max Drawdown', definition: 'Largest peak-to-trough decline in portfolio value.', why: 'Crucial risk measure; shows worst potential loss streak.' },
+        { metric: 'Sharpe Ratio', definition: 'Risk-adjusted return considering total volatility.', why: 'Standard measure for comparing strategies on a risk-adjusted basis.' },
+        { metric: 'Sortino Ratio', definition: 'Risk-adjusted return considering only downside volatility.', why: 'Better for skewed distributions like crypto; focuses on "bad" volatility.' }
+    ];
+
+    const costSavingData = [
+        { category: 'Market Data', alternative: 'Free exchange APIs (Binance, Kraken, Bybit), CryptoDataDownload CSVs, data.binance.vision' },
+        { category: 'Computation / Hosting', alternative: 'Local development/testing. Student cloud credits (Azure, AWS, GCP) for optional 24/7 paper trading.' },
+        { category: 'Software Libraries & Frameworks', alternative: 'Python (free), open-source libraries (Pandas, NumPy, Scikit-learn, TensorFlow/Keras, Pandas-TA), open-source backtesting (Freqtrade, Backtesting.py).' },
+        { category: 'Exchange Access (Trading)', alternative: 'Paper trading on exchange testnets (Binance, Bybit) with virtual funds. No real fees.' },
+        { category: 'Pre-built Bot Platforms (Optional Use)', alternative: 'Use free tiers for exploration/inspiration. Primary focus is on building your own.' },
+        { category: 'News/Sentiment Data (Optional)', alternative: 'Free tiers of news APIs (e.g., Newsdata.io, APITube.io) with limitations.' }
+    ];
+
+    function populateTable(tableId, data, columns) {
+        const tableBody = document.getElementById(tableId).querySelector('tbody');
+        if (!tableBody) return;
+        tableBody.innerHTML = ''; // Clear existing rows
+        data.forEach(rowData => {
+            const row = tableBody.insertRow();
+            columns.forEach(col => {
+                const cell = row.insertCell();
+                cell.textContent = rowData[col.key];
+                if(col.classes) cell.classList.add(...col.classes);
+            });
+        });
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        populateTable('exchangeComparisonTable', exchangeData, [
+            { key: 'feature', classes: ['px-4', 'py-2', 'font-medium', 'text-gray-800'] },
+            { key: 'binance', classes: ['px-4', 'py-2'] },
+            { key: 'kraken', classes: ['px-4', 'py-2'] },
+            { key: 'bybit', classes: ['px-4', 'py-2'] }
+        ]);
+        populateTable('performanceMetricsTable', performanceMetricsData, [
+            { key: 'metric', classes: ['px-4', 'py-2', 'font-medium', 'text-gray-800'] },
+            { key: 'definition', classes: ['px-4', 'py-2'] },
+            { key: 'why', classes: ['px-4', 'py-2'] }
+        ]);
+        populateTable('costSavingTable', costSavingData, [
+            { key: 'category', classes: ['px-4', 'py-2', 'font-medium', 'text-gray-800'] },
+            { key: 'alternative', classes: ['px-4', 'py-2'] }
+        ]);
+        populateRoadmap();
+    });
+
+    // Chart.js: Function to wrap long labels
+    function wrapText(context) {
+        const label = context.label;
+        const maxLength = 16;
+        if (label.length > maxLength) {
+            const parts = [];
+            let currentPart = '';
+            label.split(' ').forEach(word => {
+                if ((currentPart + word).length > maxLength) {
+                    parts.push(currentPart.trim());
+                    currentPart = word + ' ';
+                } else {
+                    currentPart += word + ' ';
+                }
+            });
+            parts.push(currentPart.trim());
+            return parts;
+        }
+        return label;
+    }
+    
+    let dataSourcesChartInstance = null;
+    function initDataSourcesChart() {
+        if (dataSourcesChartInstance) dataSourcesChartInstance.destroy();
+        const ctx = document.getElementById('dataSourcesChart').getContext('2d');
+        dataSourcesChartInstance = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Binance API', 'Binance Vision', 'Kraken API', 'Kraken CSVs', 'Bybit API', 'CryptoDataDownload'],
+                datasets: [{
+                    label: 'Typical Max Granularity (Lower is Finer)',
+                    data: [1, 0, 1, 0, 1, 0], // 0 for Daily/Bulk, 1 for Minute/Second level via API
+                    backgroundColor: [
+                        'rgba(0, 128, 128, 0.6)',
+                        'rgba(0, 102, 102, 0.6)',
+                        'rgba(0, 128, 128, 0.6)',
+                        'rgba(0, 102, 102, 0.6)',
+                        'rgba(0, 128, 128, 0.6)',
+                        'rgba(0, 102, 102, 0.6)'
+                    ],
+                    borderColor: [
+                        'rgba(0, 128, 128, 1)',
+                        'rgba(0, 102, 102, 1)',
+                        'rgba(0, 128, 128, 1)',
+                        'rgba(0, 102, 102, 1)',
+                        'rgba(0, 128, 128, 1)',
+                        'rgba(0, 102, 102, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Data Access Type (0=Bulk/Daily, 1=Fine Granularity API)' }
+                    },
+                    y: {
+                        ticks: {
+                            autoSkip: false,
+                            callback: function(value, index, values) {
+                                return wrapText({ label: this.getLabelForValue(value) });
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: { display: true, position: 'top' },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.x !== null) {
+                                    label += context.parsed.x === 0 ? 'Bulk/Daily Focus' : 'Fine Granularity API Focus';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    let sampleMetricsChartInstance = null;
+    function initSampleMetricsChart() {
+        if (sampleMetricsChartInstance) sampleMetricsChartInstance.destroy();
+        const ctx = document.getElementById('sampleMetricsChart').getContext('2d');
+        sampleMetricsChartInstance = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Strategy A (MA Crossover)', 'Strategy B (RSI)', 'Strategy C (AI-Enhanced MA)'],
+                datasets: [{
+                    label: 'Hypothetical Sharpe Ratio',
+                    data: [0.8, 1.2, 1.5], // Example data
+                    backgroundColor: 'rgba(0, 128, 128, 0.6)',
+                    borderColor: 'rgba(0, 128, 128, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                 scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Sharpe Ratio' }
+                    },
+                    x: {
+                         ticks: {
+                            autoSkip: false,
+                            callback: function(value, index, values) {
+                                return wrapText({ label: this.getLabelForValue(value) });
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { enabled: true }
+                }
+            }
+        });
+    }
+
+    const roadmapPhases = [
+        {
+            title: "Phase 1: Foundation and Setup (Weeks 1-4)",
+            objective: "Establish groundwork, select core tech, set up dev environment.",
+            tasks: [
+                "Detailed Project Definition & Scope Finalization (Objective, Cryptos, Exchange, Strategy, Success Metrics).",
+                "Technology Stack Selection (Python, Libraries, Backtesting Framework).",
+                "Development Environment Setup (IDE, Git, Virtual Environments).",
+                "Exchange API Familiarization (Accounts, API Keys, Basic Calls)."
+            ],
+            deliverables: "Project proposal, Functional dev environment, Successful basic API interactions."
+        },
+        {
+            title: "Phase 2: Data Acquisition & Initial Backtesting (Weeks 5-10)",
+            objective: "Acquire historical data, implement core strategy, perform initial backtesting.",
+            tasks: [
+                "Historical Data Acquisition & Preparation (Download/Fetch, Store, Clean).",
+                "Strategy Implementation (Core Logic, Indicators, Signal Generation).",
+                "Backtesting Framework Integration (Load data, Integrate strategy).",
+                "Initial Backtesting & Analysis (Run with fees, Analyze P&L, Win Rate, MDD, Visualize)."
+            ],
+            deliverables: "Data scripts, Strategy code, Working backtesting setup, Initial reports."
+        },
+        {
+            title: "Phase 3: AI/DS Integration & Advanced Backtesting (Weeks 11-16)",
+            objective: "(If scoped) Integrate AI/DS, conduct rigorous backtesting.",
+            tasks: [
+                "Feature Engineering for AI (Lagged prices, volatility, TAs).",
+                "AI Model Development & Training (Implement, Train, Evaluate standalone AI).",
+                "Integration of AI into Strategy (Modify logic to use AI output).",
+                "Advanced Backtesting & Optimization (Re-run with AI, More metrics, Parameter optimization, Robustness checks)."
+            ],
+            deliverables: "AI model code, AI-enhanced strategy, Comprehensive backtesting reports."
+        },
+        {
+            title: "Phase 4: Order Execution, Risk Management, & Paper Trading (Weeks 17-22)",
+            objective: "Implement execution & risk rules, test complete bot on Testnet.",
+            tasks: [
+                "Order Execution Module Development (Testnet API connection, Order placement, Error handling, Status checks).",
+                "Risk Management Implementation (Stop-loss, Take-profit, Position sizing).",
+                "Paper Trading Setup & Execution (Deploy to Testnet, Monitor, Log extensively).",
+                "Analysis of Paper Trading Results (Compare with backtests, Identify discrepancies, Refine)."
+            ],
+            deliverables: "Execution/Risk modules, Testnet-capable bot, Paper trading logs & reports."
+        },
+        {
+            title: "Phase 5: Final Evaluation, Documentation, & Report Writing (Weeks 23-28)",
+            objective: "Consolidate work, final evaluations, write FYP report, prepare demo.",
+            tasks: [
+                "Final Bot Evaluation (Summarize results, Critically evaluate against objectives).",
+                "Code Refinement & Documentation (Clean code, Comment, User manual).",
+                "FYP Report Writing (Structure, Detail all aspects, Present results, Discuss challenges).",
+                "Preparation for FYP Demonstration/Viva (Presentation, Demo readiness)."
+            ],
+            deliverables: "Functional documented bot, Comprehensive FYP report, Presentation materials."
+        }
+    ];
+
+    function populateRoadmap() {
+        const container = document.getElementById('roadmapContainer');
+        container.innerHTML = ''; 
+        roadmapPhases.forEach((phase, index) => {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'timeline-item card rounded-lg overflow-hidden';
+
+            const headerButton = document.createElement('button');
+            headerButton.className = 'w-full text-left p-4 bg-gray-50 hover:bg-gray-100 focus:outline-none';
+            headerButton.innerHTML = `
+                <div class="flex items-center">
+                    <div class="timeline-icon">${index + 1}</div>
+                    <h4 class="text-xl font-semibold text-teal-700 ml-4">${phase.title}</h4>
+                    <span class="ml-auto text-teal-600 text-2xl transform transition-transform duration-300">&#x25BC;</span>
+                </div>
+                <p class="text-md text-gray-600 ml-10 mt-1">${phase.objective}</p>
+            `;
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'collapsible-content p-4 border-t border-gray-200';
+            
+            let tasksHtml = '<h5 class="font-semibold text-gray-700 mb-1">Key Tasks:</h5><ul class="list-disc list-inside text-sm text-gray-600 space-y-1 mb-3">';
+            phase.tasks.forEach(task => tasksHtml += `<li>${task}</li>`);
+            tasksHtml += '</ul>';
+
+            let deliverablesHtml = '<h5 class="font-semibold text-gray-700 mb-1">Key Deliverables:</h5><p class="text-sm text-gray-600">';
+            deliverablesHtml += phase.deliverables + '</p>';
+
+            contentDiv.innerHTML = tasksHtml + deliverablesHtml;
+            
+            itemDiv.appendChild(headerButton);
+            itemDiv.appendChild(contentDiv);
+            container.appendChild(itemDiv);
+
+            headerButton.addEventListener('click', () => {
+                const icon = headerButton.querySelector('.ml-auto');
+                if (contentDiv.style.maxHeight && contentDiv.style.maxHeight !== '0px') {
+                    contentDiv.style.maxHeight = '0px';
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    contentDiv.style.maxHeight = contentDiv.scrollHeight + "px";
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+    }
+
+</script>
+</body>
+</html>
