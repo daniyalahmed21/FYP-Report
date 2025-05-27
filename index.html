@@ -3,40 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Guide: AI Crypto Trading Bot FYP</title>
+    <title>Interactive Guide: Advanced AI Crypto Trading Bot FYP</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Visualization & Content Choices:
-        - Report Introduction (I): Goal: Inform. Method: Text summary. Interaction: Static. Justification: Sets context. Library: HTML.
-        - Conceptual Foundations (II): Goal: Inform, Organize. Method: Text summaries, HTML/CSS diagram for Architecture. Interaction: Click to expand details. Justification: Clarifies core ideas. Library: HTML.
-        - Selecting Cryptos/Exchanges (III): Goal: Compare, Inform. Method: Interactive HTML table for exchanges, text for crypto selection. Interaction: Table filtering/sorting (conceptual, implemented as show/hide details). Justification: Aids decision-making. Library: HTML, JS.
-        - Tech Stack (IV): Goal: Inform, Organize. Method: Lists for Python/libraries, interactive table for data sources, comparison for backtesting frameworks. Interaction: Clickable items. Justification: Details tools. Library: HTML, JS, Chart.js for data source comparison (e.g. granularity availability).
-        - AI/DS Integration (V): Goal: Inform, Explain. Method: Text explanations, HTML/CSS flow for data preprocessing. Interaction: Step-by-step display. Justification: Clarifies complex processes. Library: HTML, JS.
-        - Development/Implementation (VI): Goal: Explain. Method: Text, code snippets (as text). Interaction: Toggle code visibility. Justification: Shows practical application. Library: HTML, JS.
-        - Testing/Validation (VII): Goal: Inform, Compare. Method: Text, interactive table for performance metrics, Chart.js for sample metric visualization (e.g., hypothetical Sharpe Ratios). Interaction: Click to see metric details. Justification: Highlights evaluation. Library: HTML, JS, Chart.js.
-        - Budgeting (VIII): Goal: Compare, Inform. Method: Interactive HTML table for cost breakdown. Interaction: Clickable rows. Justification: Practical financial guidance. Library: HTML, JS.
-        - Risk Management (IX): Goal: Inform, Organize. Method: Lists, text explanations. Interaction: Expandable sections. Justification: Emphasizes safety. Library: HTML, JS.
-        - Development Roadmap (X): Goal: Organize, Inform. Method: Interactive HTML/CSS/JS timeline/stepper. Interaction: Click steps to see details. Justification: Provides project plan. Library: HTML, JS.
-        - Challenges/Future Work (XI): Goal: Inform. Method: Lists, text. Interaction: Static. Justification: Sets realistic expectations. Library: HTML.
-        - Conclusion (XII): Goal: Summarize. Method: Text. Interaction: Static. Justification: Reinforces key takeaways. Library: HTML.
+        - Report Introduction (I): Goal: Inform. Method: Text summary. Interaction: Static. Justification: Sets context for advanced bot. Library: HTML.
+        - Conceptual Foundations (II): Goal: Inform, Organize. Method: Text summaries for advanced scope/architecture, HTML/CSS diagram for expanded Architecture. Interaction: Click to expand details. Justification: Clarifies advanced concepts. Library: HTML.
+        - Selecting Cryptos/Exchanges (III): Goal: Compare, Inform. Method: Interactive HTML table for exchanges, text for dynamic coin universe. Interaction: Table filtering/sorting (conceptual). Justification: Aids decision-making for multi-coin bot. Library: HTML, JS.
+        - Tech Stack (IV): Goal: Inform, Organize. Method: Lists for Python/advanced libraries, detailed subsection on Frontend (Next.js, state mgt, UI libs), DevOps tools. Interaction: Clickable items. Justification: Details comprehensive tools. Library: HTML, JS, Chart.js for data source comparison.
+        - AI/DS Integration (V): Goal: Inform, Explain. Method: Text explanations for advanced AI (GenAI, Transformers, GNNs, Causal Inf.), HTML/CSS flow for multi-modal data preprocessing. Interaction: Step-by-step display. Justification: Clarifies complex AI processes. Library: HTML, JS.
+        - Development/Implementation (VI): Goal: Explain. Method: Text for advanced strategies, AI integration, multi-asset execution. Interaction: Toggle code visibility (conceptual). Justification: Shows practical application of advanced features. Library: HTML, JS.
+        - Testing/Validation (VII): Goal: Inform, Compare. Method: Text, interactive table for portfolio metrics, Chart.js for sample metric visualization. Interaction: Click to see metric details. Justification: Highlights evaluation of complex system. Library: HTML, JS, Chart.js.
+        - Budgeting (VIII): Goal: Compare, Inform. Method: Interactive HTML table for cost breakdown (incl. potential costs for advanced tools/APIs if not using free tiers). Interaction: Clickable rows. Justification: Practical financial guidance. Library: HTML, JS.
+        - Risk Management (IX): Goal: Inform, Organize. Method: Lists for portfolio-level risk, text explanations. Interaction: Expandable sections. Justification: Emphasizes safety for advanced bot. Library: HTML, JS.
+        - Development Roadmap (X): Goal: Organize, Inform. Method: Interactive HTML/CSS/JS timeline for advanced bot (incl. Next.js UI dev). Interaction: Click steps to see details. Justification: Provides project plan. Library: HTML, JS.
+        - Challenges/Future Work (XI): Goal: Inform. Method: Lists for advanced challenges (complexity, data volume, GenAI integration). Interaction: Static. Justification: Sets realistic expectations. Library: HTML.
+        - Conclusion (XII): Goal: Summarize. Method: Text on advanced bot potential. Interaction: Static. Justification: Reinforces key takeaways. Library: HTML.
         - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. All diagrams are HTML/CSS based. Charts use Chart.js (Canvas).
     -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #fdfbf7; /* Warm off-white */
-            color: #3f3c36; /* Dark warm gray for text */
+            background-color: #fdfbf7; / Warm off-white /
+            color: #3f3c36; / Dark warm gray for text /
         }
         .sidebar {
-            background-color: #e8e5df; /* Lighter warm gray */
-            border-right: 1px solid #dcd8d0; /* Subtle border */
+            background-color: #e8e5df; / Lighter warm gray /
+            border-right: 1px solid #dcd8d0; / Subtle border /
         }
         .sidebar a {
-            color: #5c5850; /* Muted warm gray for nav links */
+            color: #5c5850; / Muted warm gray for nav links /
             transition: all 0.3s ease;
         }
         .sidebar a:hover, .sidebar a.active {
-            background-color: #008080; /* Muted Teal for hover/active */
+            background-color: #008080; / Muted Teal for hover/active /
             color: #fdfbf7;
             transform: translateX(2px);
         }
@@ -50,19 +50,29 @@
             background-color: #fff;
             border: 1px solid #e8e5df;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-radius: 0.5rem; / Consistent rounded corners /
         }
         .table th, .table td {
             border-color: #e8e5df;
+            padding: 0.75rem 1rem; / Consistent padding /
+            text-align: left;
         }
         .table th {
-            background-color: #f7f5f2; /* Very light warm gray for table headers */
+            background-color: #f7f5f2; / Very light warm gray for table headers /
+            font-weight: 600; / Semibold for headers /
+        }
+        .table tbody tr:nth-child(even) {
+            background-color: #fbfaf9; / Subtle striping for readability /
         }
         .btn-primary {
-            background-color: #008080; /* Muted Teal */
+            background-color: #008080; / Muted Teal /
             color: #fdfbf7;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            transition: background-color 0.3s ease;
         }
         .btn-primary:hover {
-            background-color: #006666; /* Darker Teal */
+            background-color: #006666; / Darker Teal /
         }
         .chart-container {
             position: relative;
@@ -70,71 +80,87 @@
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-            height: 300px;
+            height: 300px; 
             max-height: 400px;
         }
-        @media (min-width: 768px) {
+        @media (min-width: 768px) { / md breakpoint /
             .chart-container {
                 height: 350px;
             }
         }
-        /* Timeline specific styles */
+        / Timeline specific styles /
         .timeline-item {
             position: relative;
             padding-bottom: 2rem;
-            padding-left: 2.5rem; /* Space for icon and line */
+            padding-left: 2.5rem; 
         }
         .timeline-item:last-child {
             padding-bottom: 0;
         }
-        .timeline-item::before { /* Vertical line */
+        .timeline-item::before { 
             content: '';
             position: absolute;
-            left: 0.625rem; /* 10px / 16px = 0.625rem, adjust to center with icon */
-            top: 0;
+            left: 0.625rem; 
+            top: 0.25rem; / Align with icon center /
             bottom: 0;
             width: 2px;
-            background-color: #008080; /* Muted Teal */
+            background-color: #008080; 
         }
         .timeline-item:last-child::before {
-            height: 0.75rem; /* Stop line before end of last item text */
+            height: 0.5rem; / Shorten line for last item /
         }
         .timeline-icon {
             position: absolute;
             left: 0;
-            top: 0.25rem; /* Adjust to align with text */
-            width: 1.25rem; /* 20px */
-            height: 1.25rem; /* 20px */
+            top: 0.25rem; 
+            width: 1.25rem; 
+            height: 1.25rem; 
             border-radius: 50%;
-            background-color: #008080; /* Muted Teal */
+            background-color: #008080; 
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-size: 0.75rem;
+            z-index: 10;
         }
         .collapsible-content {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-out;
+            background-color: #fdfdfd; / Slightly off-white for content /
+        }
+        .collapsible-content.open {
+             / max-height will be set by JS /
+        }
+        / Styling for conceptual code blocks /
+        pre.code-block {
+            background-color: #2d3748; / Dark gray /
+            color: #e2e8f0; / Light gray text /
+            padding: 1rem;
+            border-radius: 0.375rem;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.875rem; / 14px /
+            line-height: 1.5;
         }
     </style>
 </head>
 <body class="flex h-screen overflow-hidden">
 
-    <aside class="sidebar w-64 min-h-screen p-4 space-y-2 overflow-y-auto">
-        <h1 class="text-2xl font-bold mb-6 text-center text-[#006666]">Crypto Bot FYP</h1>
+    <aside class="sidebar w-72 min-h-screen p-4 space-y-2 overflow-y-auto">
+        <h1 class="text-2xl font-bold mb-6 text-center text-[#006666]">Advanced Crypto Bot FYP</h1>
         <nav id="navigation" class="space-y-1">
             <a href="#introduction" class="block py-2.5 px-4 rounded-lg">I. Introduction</a>
-            <a href="#conceptual-foundations" class="block py-2.5 px-4 rounded-lg">II. Conceptual Foundations</a>
+            <a href="#conceptual-foundations" class="block py-2.5 px-4 rounded-lg">II. Conceptual Foundations (Advanced)</a>
             <a href="#selection-crypto-exchange" class="block py-2.5 px-4 rounded-lg">III. Selecting Cryptos & Exchanges</a>
-            <a href="#tech-stack" class="block py-2.5 px-4 rounded-lg">IV. Tech Stack on a Budget</a>
-            <a href="#ai-ds-integration" class="block py-2.5 px-4 rounded-lg">V. AI/DS Integration</a>
-            <a href="#dev-implementation" class="block py-2.5 px-4 rounded-lg">VI. Development & Implementation</a>
+            <a href="#tech-stack" class="block py-2.5 px-4 rounded-lg">IV. Tech Stack (Incl. Next.js)</a>
+            <a href="#ai-ds-integration" class="block py-2.5 px-4 rounded-lg">V. Advanced AI/DS Integration</a>
+            <a href="#dev-implementation" class="block py-2.5 px-4 rounded-lg">VI. Development & Implementation (Advanced)</a>
             <a href="#testing-validation" class="block py-2.5 px-4 rounded-lg">VII. Testing & Validation</a>
             <a href="#budgeting" class="block py-2.5 px-4 rounded-lg">VIII. Budgeting Your FYP</a>
             <a href="#risk-management" class="block py-2.5 px-4 rounded-lg">IX. Essential Risk Management</a>
-            <a href="#dev-roadmap" class="block py-2.5 px-4 rounded-lg">X. Phased Development Roadmap</a>
+            <a href="#dev-roadmap" class="block py-2.5 px-4 rounded-lg">X. Phased Development Roadmap (Advanced)</a>
             <a href="#challenges-future" class="block py-2.5 px-4 rounded-lg">XI. Challenges & Future Work</a>
             <a href="#conclusion" class="block py-2.5 px-4 rounded-lg">XII. Conclusion & Recommendations</a>
         </nav>
@@ -142,70 +168,81 @@
 
     <main class="flex-1 p-6 lg:p-10 overflow-y-auto">
         <section id="introduction" class="content-section">
-            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">I. Introduction: Navigating Your Crypto Trading Bot FYP</h2>
-            <div class="space-y-4 text-lg leading-relaxed card p-6 rounded-lg">
-                <p>Welcome to the interactive guide for developing an AI-powered cryptocurrency trading bot for your Final Year Project (FYP). This application translates the comprehensive report into an easily digestible format, helping you navigate the complexities of this ambitious yet rewarding endeavor.</p>
-                <p>The primary goal of such an FYP is a profound learning experience, culminating in a robustly designed, well-implemented, and thoroughly tested trading system. While profitability is an aspiration, the academic focus is on the engineering principles, design choices, and the demonstration of a functional bot. This guide will walk you through conceptualization, technology selection, AI integration, testing, budgeting, and risk management, all tailored for a student project context.</p>
-                <p>Use the navigation on the left to explore different sections. Each part of this guide aims to provide clear, actionable insights to support your FYP journey.</p>
+            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">I. Introduction: Navigating Your Advanced Crypto Trading Bot FYP</h2>
+            <div class="space-y-4 text-lg leading-relaxed card p-6">
+                <p>Welcome to the interactive guide for developing an AI-powered cryptocurrency trading bot for your Final Year Project (FYP), now updated to reflect more advanced features, a comprehensive tech stack including modern frontend considerations, and a deeper dive into AI. This application translates the comprehensive report into an easily digestible format, helping you navigate the complexities of this ambitious yet rewarding endeavor.</p>
+                <p>The primary goal of such an FYP is a profound learning experience, culminating in a robustly designed, well-implemented, and thoroughly tested trading system. While profitability is an aspiration, the academic focus is on the engineering principles, design choices, and the demonstration of a functional bot incorporating sophisticated techniques. This guide will walk you through conceptualization of advanced features, technology selection (including frontend with Next.js and expanded backend tools), advanced AI integration, development, testing, budgeting, and risk management, all tailored for a student project aiming for a higher degree of sophistication.</p>
+                <p>Use the navigation on the left to explore different sections. Each part of this guide aims to provide clear, actionable insights to support your advanced FYP journey.</p>
             </div>
         </section>
 
         <section id="conceptual-foundations" class="content-section">
-            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">II. Conceptual Foundations for Your Trading Bot</h2>
+            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">II. Conceptual Foundations for Your Advanced Trading Bot</h2>
             <div class="space-y-6">
-                <article class="card p-6 rounded-lg">
-                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">A. Defining the Bot's Purpose and Scope</h3>
-                    <p class="mb-2 text-lg leading-relaxed">This section helps you define a clear, narrow objective for your FYP bot. A focused approach is crucial for success. Consider what specific trading concept your bot will implement or what market hypothesis it will test. The key is to manage expectations and prioritize learning and a functional, well-documented system over guaranteed profits.</p>
-                    <p class="text-md text-gray-600">Key questions to address: Target cryptocurrencies, target exchange, core trading logic, and FYP success metrics (beyond profit).</p>
+                <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">A. Defining the Bot's Purpose and Scope (Advanced)</h3>
+                    <p class="mb-2 text-lg leading-relaxed">For an advanced FYP, the bot's purpose expands. It should aim for autonomous multi-coin analysis, dynamic strategy adaptation, and potentially leverage cutting-edge AI like Generative AI for insights or causal inference for more robust decision-making. The scope must still be manageable, focusing on demonstrating a few advanced features deeply rather than many superficially.</p>
+                    <p class="text-md text-gray-600">Key questions for an advanced scope: How will the bot dynamically select its trading universe? What level of autonomy in strategy adjustment is targeted? How will advanced AI (e.g., Transformers, GNNs, GenAI) be integrated and evaluated? What specific functionalities will the sophisticated Next.js-based dashboard offer?</p>
                 </article>
 
-                <article class="card p-6 rounded-lg">
-                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">B. Core Architecture</h3>
-                    <p class="mb-4 text-lg leading-relaxed">A modular architecture is highly recommended for an FYP. This allows for phased development, easier debugging, and component flexibility. This section outlines the typical components of an AI trading bot and their interactions.</p>
+                <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">B. Core Architecture (Expanded for Advanced Features)</h3>
+                    <p class="mb-4 text-lg leading-relaxed">A modular architecture remains crucial, but with added components to support advanced functionalities and a sophisticated frontend.</p>
                     <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                        <h4 class="text-xl font-semibold mb-3 text-center text-gray-700">Bot Architecture Modules</h4>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-center">
+                        <h4 class="text-xl font-semibold mb-3 text-center text-gray-700">Expanded Bot Architecture Modules</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
                             <div class="p-3 bg-teal-50 rounded-md shadow-sm border border-teal-200">
                                 <span class="text-2xl">📥</span>
-                                <p class="font-semibold mt-1 text-teal-700">Data Ingestion</p>
-                                <p class="text-xs text-gray-600">Acquires historical & real-time market data.</p>
+                                <p class="font-semibold mt-1 text-teal-700">Multi-Modal Data Ingestion</p>
+                                <p class="text-xs text-gray-600">Acquires market, news, social, on-chain data.</p>
                             </div>
                             <div class="p-3 bg-teal-50 rounded-md shadow-sm border border-teal-200">
-                                <span class="text-2xl">🧠</span>
-                                <p class="font-semibold mt-1 text-teal-700">Strategy & Signal Generation</p>
-                                <p class="text-xs text-gray-600">Houses trading logic, processes data, generates signals.</p>
+                                <span class="text-2xl">🔍</span>
+                                <p class="font-semibold mt-1 text-teal-700">AI Coin Screening & Selection</p>
+                                <p class="text-xs text-gray-600">Dynamically selects coins from a universe using AI.</p>
+                            </div>
+                            <div class="p-3 bg-teal-50 rounded-md shadow-sm border border-teal-200">
+                                <span class="text-2xl">💡</span>
+                                <p class="font-semibold mt-1 text-teal-700">Advanced AI Strategy Engine</p>
+                                <p class="text-xs text-gray-600">Houses adaptive strategies, GenAI insights, RL agents.</p>
                             </div>
                             <div class="p-3 bg-teal-50 rounded-md shadow-sm border border-teal-200">
                                 <span class="text-2xl">⚙️</span>
-                                <p class="font-semibold mt-1 text-teal-700">Order Execution</p>
-                                <p class="text-xs text-gray-600">Interfaces with exchange API to place orders.</p>
+                                <p class="font-semibold mt-1 text-teal-700">Multi-Asset Order Execution</p>
+                                <p class="text-xs text-gray-600">Manages concurrent orders across selected assets.</p>
                             </div>
                             <div class="p-3 bg-teal-50 rounded-md shadow-sm border border-teal-200">
                                 <span class="text-2xl">🛡️</span>
-                                <p class="font-semibold mt-1 text-teal-700">Risk Management</p>
-                                <p class="text-xs text-gray-600">Implements rules to manage and mitigate losses.</p>
+                                <p class="font-semibold mt-1 text-teal-700">Portfolio Risk Management</p>
+                                <p class="text-xs text-gray-600">Dynamic risk controls at portfolio & asset level.</p>
                             </div>
-                            <div class="p-3 bg-gray-100 rounded-md shadow-sm border border-gray-300">
+                             <div class="p-3 bg-orange-50 rounded-md shadow-sm border border-orange-200">
+                                <span class="text-2xl">🌐</span>
+                                <p class="font-semibold mt-1 text-orange-700">Web Backend API (e.g., Flask/FastAPI)</p>
+                                <p class="text-xs text-gray-600">Serves data to frontend, handles control commands.</p>
+                            </div>
+                            <div class="p-3 bg-orange-50 rounded-md shadow-sm border border-orange-200">
                                 <span class="text-2xl">🖥️</span>
-                                <p class="font-semibold mt-1 text-gray-700">(Optional) User Interface</p>
-                                <p class="text-xs text-gray-600">CLI or simple web dashboard for monitoring.</p>
+                                <p class="font-semibold mt-1 text-orange-700">Sophisticated UI (Next.js)</p>
+                                <p class="text-xs text-gray-600">Interactive dashboard, XAI visualizations, alerts.</p>
                             </div>
                              <div class="p-3 bg-gray-100 rounded-md shadow-sm border border-gray-300">
                                 <span class="text-2xl">📜</span>
-                                <p class="font-semibold mt-1 text-gray-700">Logging & Monitoring</p>
-                                <p class="text-xs text-gray-600">Essential for debugging and performance tracking.</p>
+                                <p class="font-semibold mt-1 text-gray-700">Advanced Logging & Monitoring</p>
+                                <p class="text-xs text-gray-600">Structured logs, DevOps monitoring integration.</p>
                             </div>
                         </div>
                     </div>
                 </article>
 
-                <article class="card p-6 rounded-lg">
-                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">C. Overview of Achievable Trading Strategies</h3>
-                    <p class="mb-2 text-lg leading-relaxed">Selecting an appropriate strategy is critical. It should be understandable, implementable, testable, and offer clear learning outcomes. This section explores strategies suitable for an FYP, emphasizing that a well-implemented simple strategy is better than a poorly executed complex one.</p>
+                <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">C. Overview of Achievable Trading Strategies (Advanced)</h3>
+                    <p class="mb-2 text-lg leading-relaxed">Advanced features enable more sophisticated strategies:</p>
                     <ul class="list-disc list-inside space-y-1 text-gray-700">
-                        <li>Technical Indicator-Based (e.g., MA Crossover, RSI Mean Reversion)</li>
-                        <li>Simple AI/ML-Driven (e.g., Predictive Model for Trend Confirmation, Sentiment Analysis Overlay)</li>
-                        <li>Advanced/Optional (e.g., Arbitrage, Grid Trading - consider complexity carefully)</li>
+                        <li>AI-Driven Dynamic Portfolio Allocation: Using RL or other AI to dynamically allocate capital across a basket of selected coins.</li>
+                        <li>Multi-Modal Event-Driven Strategies: Reacting to fused signals from news, social media, and on-chain data to trade specific events or anomalies.</li>
+                        <li>Strategies Incorporating Generative AI Insights: Using LLM-generated market summaries or sentiment to modulate trading decisions or identify novel opportunities.</li>
+                        <li>Causal Inference-Based Strategies: Attempting to build strategies on identified causal links rather than just correlations (highly academic/research-focused).</li>
                     </ul>
                 </article>
             </div>
@@ -214,147 +251,184 @@
         <section id="selection-crypto-exchange" class="content-section">
             <h2 class="text-3xl font-semibold mb-6 text-[#006666]">III. Selecting Cryptocurrencies and Exchange Platforms</h2>
             <div class="space-y-6">
-                <article class="card p-6 rounded-lg">
-                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">A. Choosing Suitable Cryptocurrencies</h3>
-                    <p class="mb-2 text-lg leading-relaxed">Focus on major cryptocurrencies or well-established altcoins for better data availability, liquidity, and more reliable API support. This section highlights criteria like liquidity, volatility, data access, and exchange support.</p>
-                    <p class="font-semibold">Recommended for FYP:</p>
-                    <ul class="list-disc list-inside space-y-1 text-gray-700">
-                        <li>Bitcoin (BTC), Ethereum (ETH)</li>
-                        <li>Major Altcoins (1-2): Cardano (ADA), Polygon (MATIC), Solana (SOL), Chainlink (LINK), Polkadot (DOT)</li>
-                        <li>Avoid: Very low-cap or "meme" coins due to poor liquidity and manipulation risks.</li>
-                    </ul>
+                <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">A. Defining the Dynamic "Tradable Universe"</h3>
+                    <p class="mb-2 text-lg leading-relaxed">For an advanced bot, pre-selecting a few coins is insufficient. The bot should dynamically define its tradable universe based on criteria like minimum liquidity, volume, market cap, and data availability for AI features. This universe can be periodically updated by querying exchange APIs for all tradable pairs and then applying these filters. The AI coin selection module then operates on this filtered universe.</p>
                 </article>
 
-                <article class="card p-6 rounded-lg">
-                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">B. Exchange APIs for Students</h3>
-                    <p class="mb-4 text-lg leading-relaxed">The right exchange API is fundamental. Look for comprehensive functionality, Python SDKs, a Testnet environment, clear documentation, and reasonable rate limits. This section compares Binance, Kraken, and Bybit based on these criteria for an FYP context.</p>
-                    <div class="overflow-x-auto">
-                        <table id="exchangeComparisonTable" class="min-w-full table-auto text-sm rounded-lg shadow">
+                <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">B. Exchange APIs for Students (Multi-Coin Considerations)</h3>
+                    <p class="mb-4 text-lg leading-relaxed">Binance, Kraken, and Bybit remain key options. For multi-coin operations, pay closer attention to API rate limits for batch symbol queries and efficient management of multiple WebSocket streams for real-time data. Binance often remains a strong choice due to its extensive listings and API support for batch requests.</p>
+                    <div class="overflow-x-auto shadow rounded-lg">
+                        <table id="exchangeComparisonTable" class="min-w-full table-auto text-sm">
                             <thead class="bg-gray-100">
                                 <tr>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-700">Feature</th>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-700">Binance</th>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-700">Kraken</th>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-700">Bybit</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-gray-700">Feature</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-gray-700">Binance</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-gray-700">Kraken</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-gray-700">Bybit</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                                 </tbody>
                         </table>
                     </div>
-                    <p class="mt-4 text-sm text-gray-600"><strong>Note:</strong> Always consult the latest official API documentation from any exchange. Binance often emerges as a strong candidate for spot trading FYPs due to its Spot Testnet and documentation. Testnet data may not perfectly replicate live conditions.</p>
+                    <p class="mt-4 text-sm text-gray-600"><strong>Note:</strong> Always consult the latest official API documentation. Testnet data may not perfectly replicate live conditions.</p>
                 </article>
             </div>
         </section>
 
         <section id="tech-stack" class="content-section">
-            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">IV. Building Your Tech Stack on a Budget</h2>
+            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">IV. Building Your Tech Stack (Incl. Next.js for Bot UI)</h2>
             <div class="space-y-6">
-                <article class="card p-6 rounded-lg">
-                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">A. Python: The Language of Choice</h3>
-                    <p class="text-lg leading-relaxed">Python is predominant for algo trading and AI due to its extensive libraries, large community, readability, and suitability for data science. Use a recent version (e.g., 3.8+).</p>
+                <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">A. Python: Core for Backend & AI</h3>
+                    <p class="text-lg leading-relaxed">Python remains the primary language for the bot's backend logic, data processing, AI model development, and exchange API interactions due to its rich ecosystem of libraries.</p>
                 </article>
-                <article class="card p-6 rounded-lg">
-                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">B. Essential Libraries</h3>
+                <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">B. Essential Backend & AI Libraries (Expanded)</h3>
                     <ul class="list-disc list-inside space-y-2 text-gray-700 columns-1 md:columns-2">
-                        <li>Pandas (Data manipulation)</li>
-                        <li>NumPy (Numerical computing)</li>
-                        <li>Scikit-learn (Classical ML)</li>
-                        <li>TA-Lib / Pandas-TA (Technical indicators)</li>
-                        <li>Matplotlib / Plotly / Bokeh (Visualization)</li>
-                        <li>TensorFlow/Keras or PyTorch (Deep learning)</li>
-                        <li>Requests / AIOHTTP (API calls)</li>
-                        <li>Websockets-client (Real-time data)</li>
+                        <li>Pandas, NumPy, Scikit-learn, TA-Lib/Pandas-TA</li>
+                        <li>TensorFlow/Keras or PyTorch (for advanced DL models like Transformers, GNNs)</li>
+                        <li>Hugging Face Transformers (for NLP, GenAI models)</li>
+                        <li>PyTorch Geometric or DGL (for Graph Neural Networks)</li>
+                        <li>Stable-Baselines3 or Ray RLlib (for Reinforcement Learning)</li>
+                        <li>FastAPI or Flask (for building the backend API for the Next.js frontend)</li>
+                        <li>SQLAlchemy (ORM for database interaction)</li>
+                        <li>APScheduler (for scheduling tasks like data updates, model retraining)</li>
+                        <li>Celery with Redis/RabbitMQ (for asynchronous task processing)</li>
                     </ul>
-                    <p class="mt-3 text-sm text-gray-600">Use virtual environments (venv, conda) and a `requirements.txt` file for dependency management.</p>
                 </article>
-                <article class="card p-6 rounded-lg">
-                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">C. Data Acquisition Strategies</h3>
-                    <p class="mb-2 text-lg leading-relaxed">Focus on free data sources. This section outlines how to access historical OHLCV data and real-time data via WebSockets, emphasizing data quality and API rate limits.</p>
+
+                <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">C. Frontend Technologies: Building a Sophisticated Dashboard with Next.js</h3>
+                    <p class="mb-2 text-lg leading-relaxed">For the actual FYP bot's user interface, a modern JavaScript framework like Next.js (built on React) is highly recommended over vanilla JS for building a rich, interactive, and performant dashboard. While this interactive guide uses vanilla JS for simplicity, your FYP bot's UI would benefit greatly from Next.js.</p>
+                    <div class="space-y-3 text-gray-700">
+                        <p><strong>Why Next.js for the Bot's Dashboard?</strong></p>
+                        <ul class="list-disc list-inside ml-4 space-y-1">
+                            <li><strong>Component-Based Architecture:</strong> Reusable UI components make development modular and maintainable.</li>
+                            <li><strong>Server-Side Rendering (SSR) & Static Site Generation (SSG):</strong> Improved performance and SEO (though SEO is less critical for a bot dashboard). SSR can be useful for initial data loading.</li>
+                            <li><strong>API Routes:</strong> Next.js can create its own backend API endpoints, simplifying the architecture if the primary bot logic is also in Node.js, or acting as a proxy/BFF (Backend for Frontend) to your Python API.</li>
+                            <li><strong>Rich Ecosystem:</strong> Access to the vast React ecosystem of libraries and tools.</li>
+                            <li><strong>Developer Experience:</strong> Features like fast refresh, optimized builds, and routing make development smoother.</li>
+                            <li><strong>TypeScript Support:</strong> For building more robust and maintainable frontend code.</li>
+                        </ul>
+                        <p><strong>Key Frontend Stack Components with Next.js:</strong></p>
+                        <ul class="list-disc list-inside ml-4 space-y-1">
+                            <li><strong>Next.js:</strong> The core framework.</li>
+                            <li><strong>State Management:</strong>
+                                <ul class="list-circle list-inside ml-4">
+                                    <li>Context API + Hooks (built-in React, good for simpler state).</li>
+                                    <li>Zustand or Jotai (lightweight, modern state management).</li>
+                                    <li>Redux Toolkit (for more complex global state).</li>
+                                </ul>
+                            </li>
+                            <li><strong>Data Fetching:</strong> SWR or React Query for efficient data fetching, caching, and synchronization with the Python backend API.</li>
+                            <li><strong>UI Component Libraries/Styling:</strong>
+                                <ul class="list-circle list-inside ml-4">
+                                    <li>Tailwind CSS (can be used directly in Next.js).</li>
+                                    <li>Headless UI + Tailwind CSS (for accessible, unstyled components).</li>
+                                    <li>Chakra UI, Material UI (MUI), or Ant Design (for pre-built, styled component libraries).</li>
+                                </ul>
+                            </li>
+                            <li><strong>Charting Libraries:</strong> Chart.js, Recharts, Nivo (React-specific options for visualizations).</li>
+                            <li><strong>Form Handling:</strong> React Hook Form or Formik.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">D. Data Acquisition & Storage (Advanced)</h3>
+                    <p class="mb-2 text-lg leading-relaxed">Focus on efficient batching and parallel fetching for multi-coin data. For storage, consider PostgreSQL or TimescaleDB (for time-series data) for handling larger volumes from multiple coins, especially if integrating multi-modal data.</p>
                     <div class="chart-container my-4">
                         <canvas id="dataSourcesChart"></canvas>
                     </div>
-                    <p class="text-sm text-gray-600">The chart above illustrates common free historical data sources and typical granularities. A hybrid approach (bulk downloads + API for recent data) is often effective.</p>
                 </article>
-                 <article class="card p-6 rounded-lg">
-                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">D. Backtesting Frameworks</h3>
-                    <p class="mb-2 text-lg leading-relaxed">Frameworks like Backtesting.py and Freqtrade save development time. This section compares them based on ease of use and custom data integration.</p>
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <div class="border p-4 rounded-md bg-gray-50">
-                            <h4 class="font-semibold text-teal-700">Backtesting.py</h4>
-                            <p class="text-sm text-gray-600">Lightweight, Pandas-friendly, good for custom strategy logic. Expects Pandas DataFrame input.</p>
-                        </div>
-                        <div class="border p-4 rounded-md bg-gray-50">
-                            <h4 class="font-semibold text-teal-700">Freqtrade</h4>
-                            <p class="text-sm text-gray-600">Comprehensive bot framework, supports live/paper trading. Has own data download/management. Custom CSVs might need conversion.</p>
-                        </div>
-                    </div>
+                 <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">E. Backtesting Frameworks (Multi-Asset Focus)</h3>
+                    <p class="mb-2 text-lg leading-relaxed">Freqtrade is well-suited for multi-coin strategies. VectorBT is another powerful Python library for quantitative analysis and backtesting, especially good for speed with Pandas/NumPy. Custom frameworks may be needed for highly novel AI strategies.</p>
                 </article>
-                <article class="card p-6 rounded-lg">
-                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">E. Development Environment</h3>
+                <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">F. Development Environment & DevOps Tools (Expanded)</h3>
                      <ul class="list-disc list-inside space-y-1 text-gray-700">
-                        <li>IDEs: VS Code, PyCharm (Community Edition)</li>
-                        <li>Version Control: Git & GitHub/GitLab</li>
-                        <li>Virtual Environments: venv, conda (essential for dependency management)</li>
+                        <li>IDEs: VS Code, PyCharm.</li>
+                        <li>Version Control: Git & GitHub/GitLab.</li>
+                        <li>Node.js, npm/yarn (for Next.js development).</li>
+                        <li>Docker & Docker Compose (for containerizing backend, AI services, and potentially the Next.js app).</li>
+                        <li>GitHub Actions or GitLab CI (for CI/CD pipelines for both backend and frontend).</li>
+                        <li>Deployment: Vercel/Netlify (for Next.js frontend), Docker containers on cloud VMs (AWS EC2, GCP Compute Engine, Azure VMs), or serverless functions (AWS Lambda, Google Cloud Functions) for backend API/bot logic.</li>
+                        <li>Monitoring: Prometheus, Grafana (for advanced monitoring of deployed services).</li>
                     </ul>
                 </article>
             </div>
         </section>
 
         <section id="ai-ds-integration" class="content-section">
-            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">V. Integrating Artificial Intelligence and Data Science</h2>
+            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">V. Advanced AI/DS Integration</h2>
              <div class="space-y-6">
-                <article class="card p-6 rounded-lg">
-                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">A. Data Preprocessing</h3>
-                    <p class="mb-2 text-lg leading-relaxed">Raw financial data needs significant preprocessing. "Garbage in, garbage out" applies. This section covers handling missing values, outlier detection, and data transformation/standardization (scaling), all while avoiding lookahead bias.</p>
-                    <ol class="list-decimal list-inside space-y-1 text-gray-700">
-                        <li>Handling Missing Values (ffill, bfill, interpolation)</li>
-                        <li>Outlier Detection & Treatment (Z-score, IQR, capping)</li>
-                        <li>Data Transformation & Standardization (Timestamps to UTC, Feature Scaling - Standardization, Min-Max, Robust Scaling)</li>
-                    </ol>
+                <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">A. Multi-Modal Data Preprocessing & Fusion</h3>
+                    <p class="mb-2 text-lg leading-relaxed">Advanced bots require preprocessing and fusion of diverse data types: market (OHLCV), textual (news, social), on-chain, and potentially macroeconomic data. This involves consistent timestamping, normalization across modalities, and techniques like attention mechanisms or cross-modal embeddings for effective fusion before feeding into AI models.</p>
                 </article>
-                <article class="card p-6 rounded-lg">
-                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">B. Feature Engineering</h3>
-                    <p class="mb-2 text-lg leading-relaxed">Create new, informative features from raw data to enhance AI model performance. Start with established technical indicators.</p>
+                <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">B. Advanced Feature Engineering</h3>
+                    <p class="mb-2 text-lg leading-relaxed">Beyond standard TAs, engineer features from:
+                        <ul class="list-disc list-inside ml-4 text-gray-700">
+                            <li>Comparative metrics: Relative strength across coins.</li>
+                            <li>Graph-based features: From GNN analysis of coin relationships or transaction networks.</li>
+                            <li>NLP-derived features: Advanced sentiment, topic modeling from news/social specific to coins.</li>
+                            <li>On-chain analytics: Smart money movements, DeFi protocol health indicators.</li>
+                        </ul>
+                    </p>
+                </article>
+                <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">C. Cutting-Edge AI-Driven Decision Making</h3>
+                    <p class="mb-2 text-lg leading-relaxed">Explore and implement more sophisticated AI models:</p>
                     <ul class="list-disc list-inside space-y-1 text-gray-700">
-                        <li>Calculating Technical Indicators (SMAs, EMAs, MACD, RSI, Bollinger Bands, ATR using `pandas-ta`)</li>
-                        <li>Price and Volume Transformations (Log Returns, Price Differences, Volatility Measures, Volume Features)</li>
-                        <li>(Optional for FYP) On-Chain Data (Access can be challenging/costly for free tiers)</li>
-                        <li>(Optional for FYP) Basic Sentiment Analysis from News (Using free news APIs like Newsdata.io, APITube.io and NLP techniques like VADER)</li>
+                        <li>Transformer Models: For time-series forecasting (price, volatility) and advanced NLP tasks.</li>
+                        <li>Graph Neural Networks (GNNs): To model inter-coin relationships, detect anomalies in transaction networks, or predict coin performance based on network structure.</li>
+                        <li>Deep Reinforcement Learning (DRL) for Portfolio Management: Agents learning dynamic capital allocation and trading across multiple assets.</li>
+                        <li>Generative AI (LLMs): For strategy ideation by prompting models with market conditions, generating market summaries, or even assisting in code generation for strategy components. Consider Retrieval Augmented Generation (RAG) for LLMs to use real-time data.</li>
+                        <li>Causal Inference Models: Attempt to identify causal drivers of price movements, aiming for more robust strategies than correlation-based ones (highly research-oriented).</li>
+                        <li>Explainable AI (XAI): Integrate techniques like SHAP, LIME, or attention visualization to understand and explain AI model decisions, crucial for an advanced FYP.</li>
                     </ul>
-                </article>
-                <article class="card p-6 rounded-lg">
-                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">C. AI-Driven Decision Making</h3>
-                    <p class="mb-2 text-lg leading-relaxed">Use AI to enhance a simpler base strategy. This section discusses predictive models (classical ML like Logistic Regression, SVMs; Deep Learning like LSTMs) and an introduction to Reinforcement Learning (RL) concepts (Q-Learning, Policy Gradients).</p>
-                    <p class="text-sm text-gray-600">For an FYP, a simple LSTM for trend confirmation is a practical AI integration. RL is more advanced and computationally intensive.</p>
                 </article>
             </div>
         </section>
 
         <section id="dev-implementation" class="content-section">
-            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">VI. Developing and Implementing Trading Logic</h2>
+            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">VI. Development & Implementation (Advanced)</h2>
             <div class="space-y-6">
-                <article class="card p-6 rounded-lg">
-                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">A. Implementing a Chosen Strategy</h3>
-                    <p class="mb-2 text-lg leading-relaxed">Translate conceptual strategy rules (e.g., MA Crossover, RSI-based Mean Reversion) into precise Python code. Define clear buy/sell/hold conditions, calculate indicators, and manage bot state.</p>
-                    <pre class="bg-gray-800 text-white p-3 rounded-md text-sm overflow-x-auto"><code># Example: MA Crossover Buy Signal Logic (Conceptual)
-# sma_short_current, sma_long_current = calculate_smas(current_data)
-# sma_short_previous, sma_long_previous = calculate_smas(previous_data)
+                <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">A. Implementing Advanced Multi-Asset Strategies</h3>
+                    <p class="mb-2 text-lg leading-relaxed">This involves building a framework to manage a portfolio of coins selected by AI. Logic must handle concurrent analysis, signal generation, and state management for multiple assets. Consider event-driven architectures for scalability.</p>
+                    <p class="my-2 text-sm text-gray-600">Conceptual code example (Python-like pseudocode):</p>
+                    <pre class="code-block"><code>class AdvancedPortfolioManager:
+    def __init__(self, ai_selector, strategy_executor):
+        self.ai_selector = ai_selector
+        self.strategy_executor = strategy_executor
+        self.active_portfolio = {} # coin -> position_details
 
-# if sma_short_current > sma_long_current and sma_short_previous <= sma_long_previous:
-#     GENERATE_BUY_SIGNAL()</code></pre>
+    def rebalance_portfolio(self, market_data_multi_coin):
+        selected_coins = self.ai_selector.get_top_coins(market_data_multi_coin)
+        # Logic to adjust positions based on selected_coins
+        # ...
+        for coin in selected_coins:
+            if coin not in self.active_portfolio or self.needs_update(coin):
+                signal = self.strategy_executor.get_signal(coin, market_data_multi_coin[coin])
+                self.execute_trade(coin, signal)
+    
+    def execute_trade(self, coin, signal):
+        # Interface with order execution module
+        print(f"Executing {signal} for {coin}")</code></pre>
                 </article>
-                <article class="card p-6 rounded-lg">
-                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">B. Integrating AI/DS Insights</h3>
-                    <p class="mb-2 text-lg leading-relaxed">Use AI model outputs (e.g., LSTM trend prediction, sentiment score) as filters, confirmations, or modulators for the primary strategy.</p>
-                     <pre class="bg-gray-800 text-white p-3 rounded-md text-sm overflow-x-auto"><code># Example: AI Integration (Conceptual)
-# if (MA_Crossover_BUY_SIGNAL) and (LSTM_Trend_Prediction == "UP"):
-#     EXECUTE_BUY_ORDER()</code></pre>
+                <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">B. Integrating Advanced AI/DS Insights</h3>
+                    <p class="mb-2 text-lg leading-relaxed">Develop clear pipelines for AI model outputs (e.g., GNN-based coin rankings, LLM sentiment scores, RL agent actions) to feed into the strategy execution engine. This might involve creating an "AI insights bus" or a shared state accessible by the strategy module.</p>
                 </article>
-                <article class="card p-6 rounded-lg">
-                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">C. Crafting Order Execution Logic</h3>
-                    <p class="mb-2 text-lg leading-relaxed">Interact with the exchange API (using SDKs) to place, monitor, and manage orders (Market vs. Limit). Implement robust error handling for API calls and manage order status and positions.</p>
-                    <p class="text-sm text-gray-600">Crucial: Handle errors like insufficient balance, invalid parameters, rate limits, and connectivity issues gracefully.</p>
+                <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">C. Crafting Robust Multi-Asset Order Execution Logic</h3>
+                    <p class="mb-2 text-lg leading-relaxed">The execution module must handle concurrent orders across multiple coins, manage portfolio-level capital allocation constraints, and deal with varying liquidity and fee structures. Implement sophisticated error handling and retry mechanisms for API interactions, especially under high load or volatile conditions.</p>
                 </article>
             </div>
         </section>
@@ -362,20 +436,20 @@
         <section id="testing-validation" class="content-section">
             <h2 class="text-3xl font-semibold mb-6 text-[#006666]">VII. Testing, Validation, and Performance Measurement</h2>
             <div class="space-y-6">
-                <article class="card p-6 rounded-lg">
-                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">A. Rigorous Backtesting</h3>
-                    <p class="mb-2 text-lg leading-relaxed">Simulate your strategy on historical data using frameworks like Backtesting.py or Freqtrade. Incorporate realistic assumptions (transaction costs, slippage) and avoid lookahead bias. Test across varied market conditions.</p>
+                <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">A. Rigorous Backtesting (Portfolio Level)</h3>
+                    <p class="mb-2 text-lg leading-relaxed">Utilize frameworks like Freqtrade or VectorBT that support portfolio-level backtesting. Test how the dynamic coin selection and capital allocation perform. Incorporate realistic assumptions for multi-asset trading (e.g., correlated slippage, impact of large portfolio rebalancing).</p>
                 </article>
-                <article class="card p-6 rounded-lg">
-                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">B. Key Performance Metrics</h3>
-                    <p class="mb-2 text-lg leading-relaxed">Evaluate strategy performance comprehensively, not just on total profit. This section details profitability, risk-adjusted return, and risk metrics.</p>
-                    <div class="overflow-x-auto mb-4">
-                        <table id="performanceMetricsTable" class="min-w-full table-auto text-sm rounded-lg shadow">
+                <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">B. Key Performance Metrics (Portfolio Context)</h3>
+                    <p class="mb-2 text-lg leading-relaxed">In addition to standard metrics, evaluate portfolio-specific ones: overall portfolio Sharpe/Sortino, asset allocation effectiveness, turnover rate, and performance of the AI coin selection module (e.g., hit rate of selected coins vs. benchmark).</p>
+                    <div class="overflow-x-auto shadow rounded-lg mb-4">
+                        <table id="performanceMetricsTable" class="min-w-full table-auto text-sm">
                             <thead class="bg-gray-100">
                                 <tr>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-700">Metric</th>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-700">Definition</th>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-700">Why it Matters for FYP</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-gray-700">Metric</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-gray-700">Definition</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-gray-700">Why it Matters for FYP</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -385,15 +459,15 @@
                     <div class="chart-container">
                         <canvas id="sampleMetricsChart"></canvas>
                     </div>
-                    <p class="mt-2 text-sm text-gray-600">The chart above shows hypothetical Sharpe Ratios for different strategy variations as an example of visualizing performance metrics.</p>
+                    <p class="mt-2 text-sm text-gray-600 text-center">Hypothetical Sharpe Ratios for strategy variations.</p>
                 </article>
-                <article class="card p-6 rounded-lg">
-                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">C. Paper Trading in Sandbox Environments</h3>
-                    <p class="mb-2 text-lg leading-relaxed">Run your bot with virtual funds on an exchange Testnet (Binance Spot Testnet, Bybit Testnet, Kraken Demo - verify spot availability for Kraken). This validates end-to-end functionality and helps identify real-world issues.</p>
+                <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">C. Paper Trading & Staged Rollout</h3>
+                    <p class="mb-2 text-lg leading-relaxed">Thoroughly paper trade the multi-asset bot on a testnet. Consider a staged rollout if moving towards any live (even small-scale experimental) deployment: start with one coin, then a small basket, before wider application. Monitor API usage intensely.</p>
                 </article>
-                <article class="card p-6 rounded-lg">
-                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">D. Iterative Refinement</h3>
-                    <p class="text-lg leading-relaxed">Analyze testing outcomes, identify weaknesses, adjust strategy/code, and re-test. Document all changes and their impact. This iterative process is key for an FYP.</p>
+                 <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">D. Unit, Integration, and End-to-End Testing</h3>
+                    <p class="text-lg leading-relaxed">Implement unit tests for AI models, data processors, and API connectors. Integration tests for module interactions. End-to-end tests simulating the full flow from data ingestion to (paper) trade execution.</p>
                 </article>
             </div>
         </section>
@@ -401,110 +475,104 @@
         <section id="budgeting" class="content-section">
             <h2 class="text-3xl font-semibold mb-6 text-[#006666]">VIII. Budgeting Your FYP: Maximizing Resources, Minimizing Costs</h2>
             <div class="space-y-6">
-                <article class="card p-6 rounded-lg">
-                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">A. Identifying Potential Expenses (and how to avoid them for FYP)</h3>
-                    <p class="mb-2 text-lg leading-relaxed">While professional bots incur costs (data APIs, hosting, etc.), an FYP can be near-zero budget by leveraging free resources. This section highlights potential industry costs and their free FYP alternatives.</p>
+                <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">A. Identifying Potential Expenses (Advanced Bot)</h3>
+                    <p class="mb-2 text-lg leading-relaxed">Advanced features might introduce new potential costs: LLM API usage (if beyond free tiers), premium data feeds for specific on-chain/sentiment data, more powerful cloud VMs for training complex models or hosting multiple services. However, the core principle of leveraging free tiers and open-source tools remains.</p>
                 </article>
-                <article class="card p-6 rounded-lg">
+                <article class="card p-6">
                     <h3 class="text-2xl font-medium mb-3 text-[#008080]">B. Cost-Saving Strategies for an FYP</h3>
-                    <div class="overflow-x-auto">
-                        <table id="costSavingTable" class="min-w-full table-auto text-sm rounded-lg shadow">
+                    <div class="overflow-x-auto shadow rounded-lg">
+                        <table id="costSavingTable" class="min-w-full table-auto text-sm">
                             <thead class="bg-gray-100">
                                 <tr>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-700">Expense Category</th>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-700">FYP Frugal Alternative</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-gray-700">Expense Category</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-gray-700">FYP Frugal Alternative</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                                 </tbody>
                         </table>
                     </div>
-                    <p class="mt-3 text-sm text-gray-600">Key strategies: Use free exchange APIs, open-source data (CryptoDataDownload, data.binance.vision), open-source software (Python, Pandas, Freqtrade, etc.), student cloud credits (Azure, AWS, GCP if needed), start with simpler models, and prioritize local development.</p>
+                    <p class="mt-3 text-sm text-gray-600">Prioritize local development. Utilize student cloud credits (Azure, AWS, GCP). Use open-source LLMs if feasible or stick to generous free tiers of commercial LLM APIs for limited use. For the Next.js frontend, free hosting tiers on Vercel or Netlify are excellent.</p>
                 </article>
             </div>
         </section>
 
         <section id="risk-management" class="content-section">
-            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">IX. Essential Risk Management for Your Bot</h2>
+            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">IX. Essential Risk Management (Portfolio Context)</h2>
             <div class="space-y-6">
-                <article class="card p-6 rounded-lg">
-                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">A. Implementing Stop-Loss (SL) and Take-Profit (TP) Orders</h3>
-                    <p class="text-lg leading-relaxed">Fundamental tools to limit losses and lock in profits on individual trades. Set SL/TP levels based on volatility (ATR), support/resistance, fixed percentage, or risk/reward ratios.</p>
+                <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">A. Portfolio-Level Risk Controls</h3>
+                    <p class="text-lg leading-relaxed">Implement rules like maximum portfolio drawdown limits, sector/asset concentration limits, and correlation-aware exposure management (e.g., reducing exposure if all selected assets become highly correlated).</p>
                 </article>
-                <article class="card p-6 rounded-lg">
-                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">B. Basic Position Sizing Rules</h3>
-                    <p class="text-lg leading-relaxed">Determine capital allocation per trade. The "1% or 2% Rule" (risking a small fixed percentage of total capital) is a common approach. Avoid over-leveraging if paper trading futures.</p>
+                <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">B. Dynamic Risk Adjustment</h3>
+                    <p class="text-lg leading-relaxed">Allow AI or market volatility indicators to dynamically adjust overall portfolio risk appetite, position sizing across assets, or the tightness of stop-losses for individual positions.</p>
                 </article>
-                <article class="card p-6 rounded-lg">
-                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">C. Addressing Bot-Specific Risks</h3>
+                <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">C. Addressing Advanced Bot-Specific Risks</h3>
                     <ul class="list-disc list-inside space-y-2 text-gray-700">
-                        <li><strong>Overfitting to Historical Data:</strong> Mitigate with out-of-sample testing, cross-validation, and paper trading.</li>
-                        <li><strong>API Key Security:</strong> NEVER hardcode keys. Use environment variables or secure config files. Restrict permissions.</li>
-                        <li><strong>Technical Glitches/Failures:</strong> Implement robust error handling, logging, and potentially heartbeat mechanisms.</li>
-                        <li><strong>Market Volatility/Flash Crashes:</strong> Use SL orders, consider "circuit breaker" logic.</li>
+                        <li><strong>Model Decay:</strong> AI models can degrade over time as market dynamics shift. Plan for periodic retraining or adaptive learning.</li>
+                        <li><strong>Scalability Issues:</strong> Ensure the system can handle data and processing for an increasing number of coins or more complex AI.</li>
+                        <li><strong>Inter-Service Communication Failures:</strong> If using a microservices architecture, handle failures gracefully.</li>
+                         <li><strong>Complexity & Debugging:</strong> Advanced systems are harder to debug. Robust logging and modular design are critical.</li>
                     </ul>
                 </article>
             </div>
         </section>
 
         <section id="dev-roadmap" class="content-section">
-            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">X. Phased Development Roadmap for Your FYP</h2>
-            <p class="mb-6 text-lg leading-relaxed card p-6 rounded-lg">A phased approach breaks down the project into manageable stages. This interactive timeline outlines a logical progression from setup to final reporting. Click on each phase to see more details.</p>
+            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">X. Phased Development Roadmap (Advanced Bot)</h2>
+            <p class="mb-6 text-lg leading-relaxed card p-6">This roadmap includes development of advanced features and a Next.js frontend for the bot's UI. Click on each phase to see more details.</p>
             <div id="roadmapContainer" class="space-y-4">
                 </div>
         </section>
 
         <section id="challenges-future" class="content-section">
-            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">XI. Challenges, Limitations, and Future Work</h2>
+            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">XI. Challenges, Limitations, and Future Work (Advanced)</h2>
             <div class="grid md:grid-cols-2 gap-6">
-                <article class="card p-6 rounded-lg">
-                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">A. Common Challenges & Limitations</h3>
+                <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">A. Common Challenges & Limitations (Advanced)</h3>
                     <ul class="list-disc list-inside space-y-1 text-gray-700">
-                        <li>Market Volatility & Unpredictability</li>
-                        <li>Data Quality & Availability (gaps, rate limits, survivorship bias, testnet imperfections)</li>
-                        <li>Technical Complexity & Scope Creep</li>
-                        <li>Overfitting Strategies & Models</li>
-                        <li>Computational Resources for Advanced AI</li>
-                        <li>API Key Security</li>
-                        <li>Time Constraints of an FYP</li>
-                        <li>"No Guaranteed Profit" Reality</li>
+                        <li>Managing complexity of multiple AI models and multi-modal data.</li>
+                        <li>Computational resources for training/running advanced AI (Transformers, GNNs, large RL models).</li>
+                        <li>Data volume and velocity for dynamic multi-coin analysis.</li>
+                        <li>Integrating and debugging a separate Next.js frontend with a Python backend.</li>
+                        <li>Ensuring reliability and scalability of advanced features.</li>
+                        <li>Effective XAI for highly complex models.</li>
+                        <li>Latency in multi-modal data fusion and decision making.</li>
                     </ul>
                 </article>
-                <article class="card p-6 rounded-lg">
-                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">B. Potential Future Work (Beyond FYP)</h3>
+                <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">B. Potential Future Work (Beyond FYP - Advanced)</h3>
                      <ul class="list-disc list-inside space-y-1 text-gray-700">
-                        <li>More Sophisticated AI/ML Models (Transformers, advanced RL)</li>
-                        <li>Expanded Data Sources (premium news, on-chain data)</li>
-                        <li>Advanced Risk Management (dynamic position sizing)</li>
-                        <li>High-Frequency Trading Capabilities</li>
-                        <li>Multi-Exchange Arbitrage</li>
-                        <li>Enhanced UI/UX</li>
-                        <li>Live Trading Deployment (with extreme caution)</li>
-                        <li>Strategy Diversification</li>
-                        <li>Formal Quantitative Analysis</li>
+                        <li>Federated Learning for privacy-preserving model training on distributed data.</li>
+                        <li>Quantum ML (exploratory) for optimization or pattern recognition.</li>
+                        <li>Fully autonomous self-improving RL agents that can evolve their own state/action spaces.</li>
+                        <li>Hyper-personalized dashboards with user-trainable AI components.</li>
+                        <li>Integration with DeFi protocols for yield farming or liquidity provision strategies.</li>
+                        <li>Advanced causal discovery and counterfactual reasoning engines.</li>
                     </ul>
                 </article>
             </div>
         </section>
 
         <section id="conclusion" class="content-section">
-            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">XII. Conclusion and Recommendations</h2>
-            <div class="space-y-4 text-lg leading-relaxed card p-6 rounded-lg">
-                <p>This guide provides a comprehensive roadmap for your AI crypto trading bot FYP. The journey is challenging but offers exceptional learning at the intersection of finance, CS, and AI.</p>
-                <h4 class="text-xl font-medium mt-4 mb-2 text-[#008080]">Key Recommendations:</h4>
+            <h2 class="text-3xl font-semibold mb-6 text-[#006666]">XII. Conclusion and Recommendations (Advanced Bot)</h2>
+            <div class="space-y-4 text-lg leading-relaxed card p-6">
+                <p>This guide outlines a path to developing a highly advanced AI crypto trading bot for an FYP, incorporating sophisticated AI, multi-coin analysis, and a modern Next.js frontend. The learning curve is steep, but the potential for a cutting-edge project is immense.</p>
+                <h4 class="text-xl font-medium mt-4 mb-2 text-[#008080]">Key Recommendations (Advanced):</h4>
                 <ul class="list-decimal list-inside space-y-2 text-gray-700">
-                    <li>Prioritize Learning & Realistic Scope.</li>
-                    <li>Embrace Open-Source & Free Tiers.</li>
-                    <li>Adopt Structured, Phased Development.</li>
-                    <li>Understand Data is Foundational (quality, preprocessing, no lookahead bias).</li>
-                    <li>Start with Simple, Understandable Strategies; enhance with AI.</li>
-                    <li>Conduct Rigorous Testing (Backtesting & Paper Trading).</li>
-                    <li>Implement Robust Risk Management.</li>
-                    <li>Secure API Keys Diligently.</li>
-                    <li>Document Thoroughly (code and report).</li>
-                    <li>Select Appropriate Tools (cryptos, exchanges, frameworks).</li>
+                    <li>Master foundational concepts before tackling highly advanced AI.</li>
+                    <li>Prioritize depth in a few advanced features over breadth.</li>
+                    <li>Leverage Python for backend/AI and Next.js for a rich frontend experience.</li>
+                    <li>Focus on robust data pipelines for multi-modal data.</li>
+                    <li>Emphasize modular design for managing complexity.</li>
+                    <li>Implement comprehensive testing, including for AI model robustness and UI functionality.</li>
+                    <li>Plan for DevOps practices from the start, including CI/CD for both backend and frontend.</li>
+                    <li>Document architecture, AI models, API designs, and UI components thoroughly.</li>
                 </ul>
-                <p>Focus on the process, technical execution, and depth of analysis for a successful academic endeavor.</p>
+                <p>An advanced FYP of this nature is a significant undertaking, requiring strong dedication, continuous learning, and effective project management. The outcome can be a truly innovative system and a powerful demonstration of diverse technical skills.</p>
             </div>
         </section>
     </main>
@@ -520,8 +588,14 @@
         contentSections.forEach(section => {
             section.classList.toggle('active', section.id === hash.substring(1));
         });
-        if (hash === '#tech-stack') initDataSourcesChart();
-        if (hash === '#testing-validation') initSampleMetricsChart();
+        if (hash === '#tech-stack') {
+            const chartCanvas = document.getElementById('dataSourcesChart');
+            if (chartCanvas && !chartCanvas._chart) initDataSourcesChart();
+        }
+        if (hash === '#testing-validation') {
+            const chartCanvas = document.getElementById('sampleMetricsChart');
+            if (chartCanvas && !chartCanvas._chart) initSampleMetricsChart();
+        }
     }
 
     navLinks.forEach(link => {
@@ -529,6 +603,9 @@
             event.preventDefault();
             const targetId = link.getAttribute('href');
             window.location.hash = targetId;
+            // Call navigateToSection directly on click as well,
+            // because hashchange might not fire if hash is already the target.
+            navigateToSection(targetId);
         });
     });
 
@@ -536,81 +613,85 @@
         const hash = window.location.hash || '#introduction';
         navigateToSection(hash);
     });
-
-    // Initial page load
-    const initialHash = window.location.hash || '#introduction';
-    navigateToSection(initialHash);
-
-    // Data for tables
-    const exchangeData = [
-        { feature: 'Python SDK', binance: 'Official & python-binance', kraken: 'krakenapi.py, python-kraken-sdk', bybit: 'pybit' },
-        { feature: 'Historical Data (Spot Klines)', binance: 'API, data.binance.vision', kraken: 'API, CSV downloads', bybit: 'API (V5)' },
-        { feature: 'Spot Testnet', binance: 'Yes, Clear', kraken: 'Futures Demo primarily, Spot API unclear', bybit: 'Yes, Supports Spot' },
-        { feature: 'Testnet Historical Data', binance: 'Yes', kraken: 'Unclear for Spot', bybit: 'Yes' },
-        { feature: 'Rate Limits Info (Klines)', binance: 'Request Weight system', kraken: 'General API limits', bybit: 'UID-based, General IP limits' },
-        { feature: 'Ease for FYP (Spot)', binance: 'Good docs, widely used', kraken: 'Good rep, CSVs helpful, Spot testnet concern', bybit: 'Good SDK, Testnet supports spot' }
-    ];
-
-    const performanceMetricsData = [
-        { metric: 'Total P&L', definition: 'Net profit or loss after all trades and costs.', why: 'Basic measure of overall profitability.' },
-        { metric: 'Profit Factor', definition: 'Gross profit divided by gross loss.', why: 'Indicates efficiency; >1 is profitable, >1.5 often good.' },
-        { metric: 'Win Rate', definition: 'Percentage of trades that were profitable.', why: 'Shows consistency of wins, but must be seen with avg win/loss size.' },
-        { metric: 'Max Drawdown', definition: 'Largest peak-to-trough decline in portfolio value.', why: 'Crucial risk measure; shows worst potential loss streak.' },
-        { metric: 'Sharpe Ratio', definition: 'Risk-adjusted return considering total volatility.', why: 'Standard measure for comparing strategies on a risk-adjusted basis.' },
-        { metric: 'Sortino Ratio', definition: 'Risk-adjusted return considering only downside volatility.', why: 'Better for skewed distributions like crypto; focuses on "bad" volatility.' }
-    ];
-
-    const costSavingData = [
-        { category: 'Market Data', alternative: 'Free exchange APIs (Binance, Kraken, Bybit), CryptoDataDownload CSVs, data.binance.vision' },
-        { category: 'Computation / Hosting', alternative: 'Local development/testing. Student cloud credits (Azure, AWS, GCP) for optional 24/7 paper trading.' },
-        { category: 'Software Libraries & Frameworks', alternative: 'Python (free), open-source libraries (Pandas, NumPy, Scikit-learn, TensorFlow/Keras, Pandas-TA), open-source backtesting (Freqtrade, Backtesting.py).' },
-        { category: 'Exchange Access (Trading)', alternative: 'Paper trading on exchange testnets (Binance, Bybit) with virtual funds. No real fees.' },
-        { category: 'Pre-built Bot Platforms (Optional Use)', alternative: 'Use free tiers for exploration/inspiration. Primary focus is on building your own.' },
-        { category: 'News/Sentiment Data (Optional)', alternative: 'Free tiers of news APIs (e.g., Newsdata.io, APITube.io) with limitations.' }
-    ];
-
+    
     function populateTable(tableId, data, columns) {
-        const tableBody = document.getElementById(tableId).querySelector('tbody');
-        if (!tableBody) return;
-        tableBody.innerHTML = ''; // Clear existing rows
+        const tableBody = document.getElementById(tableId)?.querySelector('tbody');
+        if (!tableBody) {
+            console.warn(`Table body not found for ID: ${tableId}`);
+            return;
+        }
+        tableBody.innerHTML = ''; 
         data.forEach(rowData => {
             const row = tableBody.insertRow();
             columns.forEach(col => {
                 const cell = row.insertCell();
                 cell.textContent = rowData[col.key];
-                if(col.classes) cell.classList.add(...col.classes);
+                if(col.classes && Array.isArray(col.classes)) {
+                     cell.classList.add(...col.classes);
+                } else if (col.classes) {
+                    console.warn(`col.classes for ${col.key} is not an array.`);
+                }
             });
         });
     }
     
     document.addEventListener('DOMContentLoaded', () => {
+        const exchangeData = [
+            { feature: 'Python SDK', binance: 'Official & python-binance', kraken: 'krakenapi.py, python-kraken-sdk', bybit: 'pybit' },
+            { feature: 'Historical Data (Spot Klines)', binance: 'API, data.binance.vision', kraken: 'API, CSV downloads', bybit: 'API (V5)' },
+            { feature: 'Spot Testnet', binance: 'Yes, Clear', kraken: 'Futures Demo primarily, Spot API unclear', bybit: 'Yes, Supports Spot' },
+            { feature: 'Testnet Historical Data', binance: 'Yes', kraken: 'Unclear for Spot', bybit: 'Yes' },
+            { feature: 'Rate Limits Info (Klines)', binance: 'Request Weight system', kraken: 'General API limits', bybit: 'UID-based, General IP limits' },
+            { feature: 'Ease for FYP (Spot)', binance: 'Good docs, widely used', kraken: 'Good rep, CSVs helpful, Spot testnet concern', bybit: 'Good SDK, Testnet supports spot' }
+        ];
+
+        const performanceMetricsData = [
+            { metric: 'Total P&L', definition: 'Net profit or loss after all trades and costs.', why: 'Basic measure of overall profitability.' },
+            { metric: 'Profit Factor', definition: 'Gross profit divided by gross loss.', why: 'Indicates efficiency; >1 is profitable, >1.5 often good.' },
+            { metric: 'Win Rate', definition: 'Percentage of trades that were profitable.', why: 'Shows consistency of wins, but must be seen with avg win/loss size.' },
+            { metric: 'Max Drawdown', definition: 'Largest peak-to-trough decline in portfolio value.', why: 'Crucial risk measure; shows worst potential loss streak.' },
+            { metric: 'Sharpe Ratio (Portfolio)', definition: 'Risk-adjusted return considering total portfolio volatility.', why: 'Standard measure for comparing multi-asset strategies.' },
+            { metric: 'Sortino Ratio (Portfolio)', definition: 'Risk-adjusted return considering only downside portfolio volatility.', why: 'Better for skewed crypto distributions.' },
+            { metric: 'Portfolio Turnover', definition: 'Rate at which assets in a portfolio are bought and sold.', why: 'Indicates trading frequency and potential transaction cost impact.'}
+        ];
+
+        const costSavingData = [
+            { category: 'Market Data', alternative: 'Free exchange APIs, CryptoDataDownload CSVs, data.binance.vision. Free tiers for news/on-chain APIs.' },
+            { category: 'Computation / Hosting', alternative: 'Local dev. Student cloud credits (Azure, AWS, GCP). Vercel/Netlify free tiers for Next.js UI.' },
+            { category: 'Software Libraries & Frameworks', alternative: 'Python, Next.js (React), open-source AI/ML/DL libs, Freqtrade, VectorBT.' },
+            { category: 'Exchange Access (Trading)', alternative: 'Paper trading on exchange testnets with virtual funds.' },
+            { category: 'LLM APIs (Optional)', alternative: 'Use free tiers of OpenAI/Anthropic, or explore open-source LLMs runnable locally/on free cloud compute.' }
+        ];
+
         populateTable('exchangeComparisonTable', exchangeData, [
-            { key: 'feature', classes: ['px-4', 'py-2', 'font-medium', 'text-gray-800'] },
-            { key: 'binance', classes: ['px-4', 'py-2'] },
-            { key: 'kraken', classes: ['px-4', 'py-2'] },
-            { key: 'bybit', classes: ['px-4', 'py-2'] }
+            { key: 'feature', classes: ['px-4', 'py-3', 'font-medium', 'text-gray-800'] },
+            { key: 'binance', classes: ['px-4', 'py-3'] },
+            { key: 'kraken', classes: ['px-4', 'py-3'] },
+            { key: 'bybit', classes: ['px-4', 'py-3'] }
         ]);
         populateTable('performanceMetricsTable', performanceMetricsData, [
-            { key: 'metric', classes: ['px-4', 'py-2', 'font-medium', 'text-gray-800'] },
-            { key: 'definition', classes: ['px-4', 'py-2'] },
-            { key: 'why', classes: ['px-4', 'py-2'] }
+            { key: 'metric', classes: ['px-4', 'py-3', 'font-medium', 'text-gray-800'] },
+            { key: 'definition', classes: ['px-4', 'py-3'] },
+            { key: 'why', classes: ['px-4', 'py-3'] }
         ]);
         populateTable('costSavingTable', costSavingData, [
-            { key: 'category', classes: ['px-4', 'py-2', 'font-medium', 'text-gray-800'] },
-            { key: 'alternative', classes: ['px-4', 'py-2'] }
+            { key: 'category', classes: ['px-4', 'py-3', 'font-medium', 'text-gray-800'] },
+            { key: 'alternative', classes: ['px-4', 'py-3'] }
         ]);
         populateRoadmap();
+        
+        const initialHash = window.location.hash || '#introduction';
+        navigateToSection(initialHash); // Ensure correct section is shown on load
     });
 
-    // Chart.js: Function to wrap long labels
     function wrapText(context) {
-        const label = context.label;
+        const label = context.label || (context.dataset && context.dataset.label) || '';
         const maxLength = 16;
         if (label.length > maxLength) {
             const parts = [];
             let currentPart = '';
             label.split(' ').forEach(word => {
-                if ((currentPart + word).length > maxLength) {
+                if ((currentPart + word).length > maxLength && currentPart.length > 0) {
                     parts.push(currentPart.trim());
                     currentPart = word + ' ';
                 } else {
@@ -625,30 +706,24 @@
     
     let dataSourcesChartInstance = null;
     function initDataSourcesChart() {
+        const canvas = document.getElementById('dataSourcesChart');
+        if (!canvas) return;
         if (dataSourcesChartInstance) dataSourcesChartInstance.destroy();
-        const ctx = document.getElementById('dataSourcesChart').getContext('2d');
+        const ctx = canvas.getContext('2d');
         dataSourcesChartInstance = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Binance API', 'Binance Vision', 'Kraken API', 'Kraken CSVs', 'Bybit API', 'CryptoDataDownload'],
+                labels: ['Binance API', 'Binance Vision', 'Kraken API', 'Kraken CSVs', 'Bybit API', 'CryptoDataDownload', 'News APIs', 'On-Chain APIs (Free Tier)'],
                 datasets: [{
-                    label: 'Typical Max Granularity (Lower is Finer)',
-                    data: [1, 0, 1, 0, 1, 0], // 0 for Daily/Bulk, 1 for Minute/Second level via API
+                    label: 'Typical Max Granularity/Access',
+                    data: [1, 0, 1, 0, 1, 0, 2, 2], 
                     backgroundColor: [
-                        'rgba(0, 128, 128, 0.6)',
-                        'rgba(0, 102, 102, 0.6)',
-                        'rgba(0, 128, 128, 0.6)',
-                        'rgba(0, 102, 102, 0.6)',
-                        'rgba(0, 128, 128, 0.6)',
-                        'rgba(0, 102, 102, 0.6)'
+                        'rgba(0, 128, 128, 0.7)','rgba(0, 102, 102, 0.7)','rgba(0, 128, 128, 0.7)','rgba(0, 102, 102, 0.7)',
+                        'rgba(0, 128, 128, 0.7)','rgba(0, 102, 102, 0.7)','rgba(75, 192, 192, 0.7)','rgba(153, 102, 255, 0.7)'
                     ],
                     borderColor: [
-                        'rgba(0, 128, 128, 1)',
-                        'rgba(0, 102, 102, 1)',
-                        'rgba(0, 128, 128, 1)',
-                        'rgba(0, 102, 102, 1)',
-                        'rgba(0, 128, 128, 1)',
-                        'rgba(0, 102, 102, 1)'
+                        'rgba(0, 128, 128, 1)','rgba(0, 102, 102, 1)','rgba(0, 128, 128, 1)','rgba(0, 102, 102, 1)',
+                        'rgba(0, 128, 128, 1)','rgba(0, 102, 102, 1)','rgba(75, 192, 192, 1)','rgba(153, 102, 255, 1)'
                     ],
                     borderWidth: 1
                 }]
@@ -660,11 +735,12 @@
                 scales: {
                     x: {
                         beginAtZero: true,
-                        title: { display: true, text: 'Data Access Type (0=Bulk/Daily, 1=Fine Granularity API)' }
+                        title: { display: true, text: 'Data Access Type (0=Bulk, 1=Fine API, 2=Specialized)', font: {size: 10} }
                     },
                     y: {
                         ticks: {
                             autoSkip: false,
+                            font: {size: 10},
                             callback: function(value, index, values) {
                                 return wrapText({ label: this.getLabelForValue(value) });
                             }
@@ -672,18 +748,16 @@
                     }
                 },
                 plugins: {
-                    legend: { display: true, position: 'top' },
+                    legend: { display: true, position: 'bottom', labels: {font: {size: 10}} },
                     tooltip: {
                         callbacks: {
                             label: function(context) {
-                                let label = context.dataset.label || '';
-                                if (label) {
-                                    label += ': ';
-                                }
-                                if (context.parsed.x !== null) {
-                                    label += context.parsed.x === 0 ? 'Bulk/Daily Focus' : 'Fine Granularity API Focus';
-                                }
-                                return label;
+                                let val = context.parsed.x;
+                                let desc = 'Unknown';
+                                if (val === 0) desc = 'Bulk/Daily Focus';
+                                else if (val === 1) desc = 'Fine Granularity API Focus';
+                                else if (val === 2) desc = 'Specialized/Limited Free Tier';
+                                return `${context.dataset.label || ''}: ${desc}`;
                             }
                         }
                     }
@@ -694,16 +768,18 @@
 
     let sampleMetricsChartInstance = null;
     function initSampleMetricsChart() {
+        const canvas = document.getElementById('sampleMetricsChart');
+        if (!canvas) return;
         if (sampleMetricsChartInstance) sampleMetricsChartInstance.destroy();
-        const ctx = document.getElementById('sampleMetricsChart').getContext('2d');
+        const ctx = canvas.getContext('2d');
         sampleMetricsChartInstance = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Strategy A (MA Crossover)', 'Strategy B (RSI)', 'Strategy C (AI-Enhanced MA)'],
+                labels: ['Strategy A (Multi-Asset MA)', 'Strategy B (Portfolio RL)', 'Strategy C (AI-Screened + TA)'],
                 datasets: [{
-                    label: 'Hypothetical Sharpe Ratio',
-                    data: [0.8, 1.2, 1.5], // Example data
-                    backgroundColor: 'rgba(0, 128, 128, 0.6)',
+                    label: 'Hypothetical Portfolio Sharpe Ratio',
+                    data: [0.7, 1.1, 1.4], 
+                    backgroundColor: 'rgba(0, 128, 128, 0.7)',
                     borderColor: 'rgba(0, 128, 128, 1)',
                     borderWidth: 1
                 }]
@@ -714,11 +790,12 @@
                  scales: {
                     y: {
                         beginAtZero: true,
-                        title: { display: true, text: 'Sharpe Ratio' }
+                        title: { display: true, text: 'Portfolio Sharpe Ratio', font: {size: 10} }
                     },
                     x: {
                          ticks: {
                             autoSkip: false,
+                            font: {size: 10},
                             callback: function(value, index, values) {
                                 return wrapText({ label: this.getLabelForValue(value) });
                             }
@@ -735,82 +812,87 @@
 
     const roadmapPhases = [
         {
-            title: "Phase 1: Foundation and Setup (Weeks 1-4)",
-            objective: "Establish groundwork, select core tech, set up dev environment.",
+            title: "Phase 1: Foundation & Advanced Scope (Weeks 1-5)",
+            objective: "Define advanced scope, select core tech (incl. Next.js for UI), setup dev environments.",
             tasks: [
-                "Detailed Project Definition & Scope Finalization (Objective, Cryptos, Exchange, Strategy, Success Metrics).",
-                "Technology Stack Selection (Python, Libraries, Backtesting Framework).",
-                "Development Environment Setup (IDE, Git, Virtual Environments).",
-                "Exchange API Familiarization (Accounts, API Keys, Basic Calls)."
+                "Detailed Project Definition: Advanced features (multi-coin, AI type), dynamic coin universe, Next.js UI goals.",
+                "Tech Stack Finalization: Python backend (FastAPI/Flask), Next.js frontend, DB (PostgreSQL), AI libs (Transformers, RL libs), DevOps tools (Docker, GitHub Actions).",
+                "Dev Environment Setup: Python backend, Node.js/Next.js frontend, Git, Docker basics.",
+                "Exchange API & Advanced Data Source Familiarization: Test multi-asset data fetching, explore news/on-chain API free tiers."
             ],
-            deliverables: "Project proposal, Functional dev environment, Successful basic API interactions."
+            deliverables: "Advanced project proposal, Functional dev environments (backend/frontend), Basic API interactions for multi-coin data, Initial Next.js UI mockups/prototype."
         },
         {
-            title: "Phase 2: Data Acquisition & Initial Backtesting (Weeks 5-10)",
-            objective: "Acquire historical data, implement core strategy, perform initial backtesting.",
+            title: "Phase 2: Core Backend, AI Selection Model, UI Shell (Weeks 6-12)",
+            objective: "Develop core multi-coin backend, initial AI for coin selection, basic Next.js UI structure.",
             tasks: [
-                "Historical Data Acquisition & Preparation (Download/Fetch, Store, Clean).",
-                "Strategy Implementation (Core Logic, Indicators, Signal Generation).",
-                "Backtesting Framework Integration (Load data, Integrate strategy).",
-                "Initial Backtesting & Analysis (Run with fees, Analyze P&L, Win Rate, MDD, Visualize)."
+                "Multi-Modal Data Acquisition & Preprocessing Pipeline.",
+                "Initial AI Coin Screening Model Development (e.g., ranking based on volatility/momentum/sentiment).",
+                "Backend API Development (FastAPI/Flask) for core data & AI insights.",
+                "Next.js UI Shell: Setup routing, basic layout, components for displaying data, connect to backend API for initial data display.",
+                "Basic CI/CD setup for backend and frontend."
             ],
-            deliverables: "Data scripts, Strategy code, Working backtesting setup, Initial reports."
+            deliverables: "Data pipeline scripts, Initial AI coin selection model, Backend API v1, Next.js UI shell connected to API, Basic CI pipeline."
         },
         {
-            title: "Phase 3: AI/DS Integration & Advanced Backtesting (Weeks 11-16)",
-            objective: "(If scoped) Integrate AI/DS, conduct rigorous backtesting.",
+            title: "Phase 3: Advanced AI Strategy, Portfolio Logic, UI Enhancement (Weeks 13-19)",
+            objective: "Implement advanced AI trading strategy, portfolio management logic, enhance Next.js UI with interactivity & visualizations.",
             tasks: [
-                "Feature Engineering for AI (Lagged prices, volatility, TAs).",
-                "AI Model Development & Training (Implement, Train, Evaluate standalone AI).",
-                "Integration of AI into Strategy (Modify logic to use AI output).",
-                "Advanced Backtesting & Optimization (Re-run with AI, More metrics, Parameter optimization, Robustness checks)."
+                "Develop Advanced AI Trading Logic (e.g., RL for portfolio allocation, Transformer for prediction, GenAI for insights).",
+                "Implement Multi-Asset Portfolio Management & Order Execution Logic.",
+                "Enhance Next.js UI: Interactive charts (Chart.js/Recharts), detailed coin views, trade history, performance metrics, XAI visualizations (if applicable).",
+                "Rigorous Backtesting of AI Strategy & Portfolio Logic (using VectorBT/Freqtrade)."
             ],
-            deliverables: "AI model code, AI-enhanced strategy, Comprehensive backtesting reports."
+            deliverables: "Advanced AI strategy module, Portfolio management code, Enhanced Next.js UI with visualizations, Comprehensive backtesting reports."
         },
         {
-            title: "Phase 4: Order Execution, Risk Management, & Paper Trading (Weeks 17-22)",
-            objective: "Implement execution & risk rules, test complete bot on Testnet.",
+            title: "Phase 4: Integration, Paper Trading, DevOps Refinement (Weeks 20-25)",
+            objective: "Integrate all components, conduct thorough paper trading on testnet, refine DevOps practices.",
             tasks: [
-                "Order Execution Module Development (Testnet API connection, Order placement, Error handling, Status checks).",
-                "Risk Management Implementation (Stop-loss, Take-profit, Position sizing).",
-                "Paper Trading Setup & Execution (Deploy to Testnet, Monitor, Log extensively).",
-                "Analysis of Paper Trading Results (Compare with backtests, Identify discrepancies, Refine)."
+                "Full System Integration: Backend AI, portfolio logic, execution module, Next.js UI.",
+                "Deploy to Testnet for Paper Trading: Monitor multi-asset execution, risk management, UI responsiveness.",
+                "Refine Docker configurations, CI/CD pipelines for automated testing & deployment to staging/paper-trading env.",
+                "Implement Advanced Logging & Monitoring (e.g., Prometheus/Grafana basics)."
             ],
-            deliverables: "Execution/Risk modules, Testnet-capable bot, Paper trading logs & reports."
+            deliverables: "Fully integrated bot system, Testnet paper trading logs & performance, Optimized Docker setup, Mature CI/CD pipeline."
         },
         {
-            title: "Phase 5: Final Evaluation, Documentation, & Report Writing (Weeks 23-28)",
-            objective: "Consolidate work, final evaluations, write FYP report, prepare demo.",
+            title: "Phase 5: Final Evaluation, XAI, Documentation, Report (Weeks 26-30+)",
+            objective: "Final system evaluation, focus on XAI, complete documentation, write comprehensive FYP report, prepare demo.",
             tasks: [
-                "Final Bot Evaluation (Summarize results, Critically evaluate against objectives).",
-                "Code Refinement & Documentation (Clean code, Comment, User manual).",
-                "FYP Report Writing (Structure, Detail all aspects, Present results, Discuss challenges).",
-                "Preparation for FYP Demonstration/Viva (Presentation, Demo readiness)."
+                "Final Bot & UI Evaluation: Performance against objectives, stability, usability of Next.js dashboard.",
+                "Develop/Refine XAI Components: Ensure insights from AI models are clearly presented in the UI.",
+                "Comprehensive Documentation: Code, architecture (backend/frontend), AI models, APIs, DevOps setup, user manual for UI.",
+                "FYP Report Writing & Demo Preparation: Detail all aspects of the advanced system."
             ],
-            deliverables: "Functional documented bot, Comprehensive FYP report, Presentation materials."
+            deliverables: "Final robust bot & Next.js UI, XAI features, Full documentation suite, Comprehensive FYP report, Demo materials."
         }
     ];
 
     function populateRoadmap() {
         const container = document.getElementById('roadmapContainer');
+        if (!container) return;
         container.innerHTML = ''; 
         roadmapPhases.forEach((phase, index) => {
             const itemDiv = document.createElement('div');
             itemDiv.className = 'timeline-item card rounded-lg overflow-hidden';
 
             const headerButton = document.createElement('button');
-            headerButton.className = 'w-full text-left p-4 bg-gray-50 hover:bg-gray-100 focus:outline-none';
+            headerButton.setAttribute('aria-expanded', 'false');
+            headerButton.className = 'w-full text-left p-4 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-500 rounded-t-lg';
             headerButton.innerHTML = `
-                <div class="flex items-center">
-                    <div class="timeline-icon">${index + 1}</div>
-                    <h4 class="text-xl font-semibold text-teal-700 ml-4">${phase.title}</h4>
-                    <span class="ml-auto text-teal-600 text-2xl transform transition-transform duration-300">&#x25BC;</span>
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center">
+                        <div class="timeline-icon">${index + 1}</div>
+                        <h4 class="text-xl font-semibold text-teal-700 ml-4">${phase.title}</h4>
+                    </div>
+                    <svg class="w-6 h-6 text-teal-600 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
                 <p class="text-md text-gray-600 ml-10 mt-1">${phase.objective}</p>
             `;
             
             const contentDiv = document.createElement('div');
-            contentDiv.className = 'collapsible-content p-4 border-t border-gray-200';
+            contentDiv.className = 'collapsible-content p-4 border-t border-gray-200'; // Removed bg-white, inherits from card or can be set
             
             let tasksHtml = '<h5 class="font-semibold text-gray-700 mb-1">Key Tasks:</h5><ul class="list-disc list-inside text-sm text-gray-600 space-y-1 mb-3">';
             phase.tasks.forEach(task => tasksHtml += `<li>${task}</li>`);
@@ -826,13 +908,17 @@
             container.appendChild(itemDiv);
 
             headerButton.addEventListener('click', () => {
-                const icon = headerButton.querySelector('.ml-auto');
-                if (contentDiv.style.maxHeight && contentDiv.style.maxHeight !== '0px') {
-                    contentDiv.style.maxHeight = '0px';
-                    icon.style.transform = 'rotate(0deg)';
-                } else {
+                const isExpanded = headerButton.getAttribute('aria-expanded') === 'true';
+                headerButton.setAttribute('aria-expanded', !isExpanded);
+                const icon = headerButton.querySelector('svg');
+                if (!isExpanded) {
                     contentDiv.style.maxHeight = contentDiv.scrollHeight + "px";
+                    contentDiv.classList.add('open');
                     icon.style.transform = 'rotate(180deg)';
+                } else {
+                    contentDiv.style.maxHeight = '0px';
+                    contentDiv.classList.remove('open');
+                    icon.style.transform = 'rotate(0deg)';
                 }
             });
         });
