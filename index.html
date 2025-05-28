@@ -10,7 +10,7 @@
         - Report Introduction (I): Goal: Inform. Method: Text summary. Interaction: Static. Justification: Sets context for advanced bot. Library: HTML.
         - Conceptual Foundations (II): Goal: Inform, Organize. Method: Text summaries for advanced scope/architecture, HTML/CSS diagram for expanded Architecture. Interaction: Click to expand details. Justification: Clarifies advanced concepts. Library: HTML.
         - Selecting Cryptos/Exchanges (III): Goal: Compare, Inform. Method: Interactive HTML table for exchanges, text for dynamic coin universe. Interaction: Table filtering/sorting (conceptual). Justification: Aids decision-making for multi-coin bot. Library: HTML, JS.
-        - Tech Stack (IV): Goal: Inform, Organize. Method: Lists for Python/advanced libraries, detailed subsection on Frontend (Next.js, state mgt, UI libs), DevOps tools. Interaction: Clickable items. Justification: Details comprehensive tools. Library: HTML, JS, Chart.js for data source comparison.
+        - Tech Stack (IV): Goal: Inform, Organize. Method: Lists for Python/advanced libraries, detailed subsection on Frontend (Next.js, state mgt, UI libs), DevOps tools, NEW: Free APIs for FYP. Interaction: Clickable items. Justification: Details comprehensive tools. Library: HTML, JS, Chart.js for data source comparison.
         - AI/DS Integration (V): Goal: Inform, Explain. Method: Text explanations for advanced AI (GenAI, Transformers, GNNs, Causal Inf.), HTML/CSS flow for multi-modal data preprocessing. Interaction: Step-by-step display. Justification: Clarifies complex AI processes. Library: HTML, JS.
         - Development/Implementation (VI): Goal: Explain. Method: Text for advanced strategies, AI integration, multi-asset execution. Interaction: Toggle code visibility (conceptual). Justification: Shows practical application of advanced features. Library: HTML, JS.
         - Testing/Validation (VII): Goal: Inform, Compare. Method: Text, interactive table for portfolio metrics, Chart.js for sample metric visualization. Interaction: Click to see metric details. Justification: Highlights evaluation of complex system. Library: HTML, JS, Chart.js.
@@ -24,19 +24,19 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #fdfbf7; / Warm off-white /
-            color: #3f3c36; / Dark warm gray for text /
+            background-color: #fdfbf7; /* Warm off-white */
+            color: #3f3c36; /* Dark warm gray for text */
         }
         .sidebar {
-            background-color: #e8e5df; / Lighter warm gray /
-            border-right: 1px solid #dcd8d0; / Subtle border /
+            background-color: #e8e5df; /* Lighter warm gray */
+            border-right: 1px solid #dcd8d0; /* Subtle border */
         }
         .sidebar a {
-            color: #5c5850; / Muted warm gray for nav links /
+            color: #5c5850; /* Muted warm gray for nav links */
             transition: all 0.3s ease;
         }
         .sidebar a:hover, .sidebar a.active {
-            background-color: #008080; / Muted Teal for hover/active /
+            background-color: #008080; /* Muted Teal for hover/active */
             color: #fdfbf7;
             transform: translateX(2px);
         }
@@ -50,29 +50,29 @@
             background-color: #fff;
             border: 1px solid #e8e5df;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            border-radius: 0.5rem; / Consistent rounded corners /
+            border-radius: 0.5rem; /* Consistent rounded corners */
         }
         .table th, .table td {
             border-color: #e8e5df;
-            padding: 0.75rem 1rem; / Consistent padding /
+            padding: 0.75rem 1rem; /* Consistent padding */
             text-align: left;
         }
         .table th {
-            background-color: #f7f5f2; / Very light warm gray for table headers /
-            font-weight: 600; / Semibold for headers /
+            background-color: #f7f5f2; /* Very light warm gray for table headers */
+            font-weight: 600; /* Semibold for headers */
         }
         .table tbody tr:nth-child(even) {
-            background-color: #fbfaf9; / Subtle striping for readability /
+            background-color: #fbfaf9; /* Subtle striping for readability */
         }
         .btn-primary {
-            background-color: #008080; / Muted Teal /
+            background-color: #008080; /* Muted Teal */
             color: #fdfbf7;
             padding: 0.5rem 1rem;
             border-radius: 0.375rem;
             transition: background-color 0.3s ease;
         }
         .btn-primary:hover {
-            background-color: #006666; / Darker Teal /
+            background-color: #006666; /* Darker Teal */
         }
         .chart-container {
             position: relative;
@@ -83,12 +83,12 @@
             height: 300px; 
             max-height: 400px;
         }
-        @media (min-width: 768px) { / md breakpoint /
+        @media (min-width: 768px) { /* md breakpoint */
             .chart-container {
                 height: 350px;
             }
         }
-        / Timeline specific styles /
+        /* Timeline specific styles */
         .timeline-item {
             position: relative;
             padding-bottom: 2rem;
@@ -101,13 +101,13 @@
             content: '';
             position: absolute;
             left: 0.625rem; 
-            top: 0.25rem; / Align with icon center /
+            top: 0.25rem; /* Align with icon center */
             bottom: 0;
             width: 2px;
             background-color: #008080; 
         }
         .timeline-item:last-child::before {
-            height: 0.5rem; / Shorten line for last item /
+            height: 0.5rem; /* Shorten line for last item */
         }
         .timeline-icon {
             position: absolute;
@@ -128,21 +128,32 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-out;
-            background-color: #fdfdfd; / Slightly off-white for content /
+            background-color: #fdfdfd; /* Slightly off-white for content */
         }
         .collapsible-content.open {
-             / max-height will be set by JS /
+             /* max-height will be set by JS */
         }
-        / Styling for conceptual code blocks /
+        /* Styling for conceptual code blocks */
         pre.code-block {
-            background-color: #2d3748; / Dark gray /
-            color: #e2e8f0; / Light gray text /
+            background-color: #2d3748; /* Dark gray */
+            color: #e2e8f0; /* Light gray text */
             padding: 1rem;
             border-radius: 0.375rem;
             overflow-x: auto;
             font-family: 'Courier New', Courier, monospace;
-            font-size: 0.875rem; / 14px /
+            font-size: 0.875rem; /* 14px */
             line-height: 1.5;
+        }
+        /* Custom list style for API section */
+        .api-list li {
+            padding-left: 1.5em;
+            text-indent: -1.5em;
+            margin-bottom: 0.5em;
+        }
+        .api-list li::before {
+            content: "🔗"; /* Link emoji or other icon */
+            margin-right: 0.5em;
+            color: #008080; /* Teal icon */
         }
     </style>
 </head>
@@ -239,10 +250,10 @@
                     <h3 class="text-2xl font-medium mb-3 text-[#008080]">C. Overview of Achievable Trading Strategies (Advanced)</h3>
                     <p class="mb-2 text-lg leading-relaxed">Advanced features enable more sophisticated strategies:</p>
                     <ul class="list-disc list-inside space-y-1 text-gray-700">
-                        <li>AI-Driven Dynamic Portfolio Allocation: Using RL or other AI to dynamically allocate capital across a basket of selected coins.</li>
-                        <li>Multi-Modal Event-Driven Strategies: Reacting to fused signals from news, social media, and on-chain data to trade specific events or anomalies.</li>
-                        <li>Strategies Incorporating Generative AI Insights: Using LLM-generated market summaries or sentiment to modulate trading decisions or identify novel opportunities.</li>
-                        <li>Causal Inference-Based Strategies: Attempting to build strategies on identified causal links rather than just correlations (highly academic/research-focused).</li>
+                        <li>**AI-Driven Dynamic Portfolio Allocation:** Using RL or other AI to dynamically allocate capital across a basket of selected coins.</li>
+                        <li>**Multi-Modal Event-Driven Strategies:** Reacting to fused signals from news, social media, and on-chain data to trade specific events or anomalies.</li>
+                        <li>**Strategies Incorporating Generative AI Insights:** Using LLM-generated market summaries or sentiment to modulate trading decisions or identify novel opportunities.</li>
+                        <li>**Causal Inference-Based Strategies:** Attempting to build strategies on identified causal links rather than just correlations (highly academic/research-focused).</li>
                     </ul>
                 </article>
             </div>
@@ -360,6 +371,52 @@
                         <li>Monitoring: Prometheus, Grafana (for advanced monitoring of deployed services).</li>
                     </ul>
                 </article>
+                <article class="card p-6">
+                    <h3 class="text-2xl font-medium mb-3 text-[#008080]">G. Free APIs for FYP Development</h3>
+                    <p class="mb-2 text-lg leading-relaxed">Leveraging free APIs is essential for a budget-conscious FYP. Here's a breakdown of API types and examples:</p>
+                    
+                    <h4 class="text-xl font-medium mt-4 mb-2 text-teal-700">1. Market Data Fetching (OHLCV, Real-time)</h4>
+                    <ul class="api-list text-gray-700">
+                        <li><strong>Binance API:</strong> Provides comprehensive historical kline data (OHLCV) via REST API and real-time data via WebSockets. Well-documented with official Python SDKs. Testnet available. (Covered in Sec III.B)</li>
+                        <li><strong>Bybit API:</strong> Offers kline data and WebSocket streams for spot and derivatives. Good Python SDK (`pybit`) and testnet. (Covered in Sec III.B)</li>
+                        <li><strong>Kraken API:</strong> Provides OHLCV data and WebSocket support. Python SDKs available. Testnet primarily for futures. (Covered in Sec III.B)</li>
+                        <li><strong>CryptoDataDownload:</strong> Not an API, but a source of free historical CSV data for many exchanges and pairs, useful for bulk backtesting.</li>
+                        <li><strong>Yahoo Finance API (e.g., `yfinance` library):</strong> While not crypto-specific, can provide data for major cryptocurrencies listed as tickers. Rate limits apply.</li>
+                        <li><strong>CoinGecko API:</strong> Offers a free tier for fetching price, volume, and market cap data for a wide range of cryptocurrencies. Rate limited.</li>
+                    </ul>
+
+                    <h4 class="text-xl font-medium mt-4 mb-2 text-teal-700">2. News & Sentiment Analysis</h4>
+                     <ul class="api-list text-gray-700">
+                        <li><strong>Newsdata.io:</strong> Provides a crypto-specific news API with a free tier that usually offers a limited number of requests and historical access. Good for fetching headlines/summaries for NLP.</li>
+                        <li><strong>APITube.io:</strong> General news API that can be filtered by keywords (e.g., "Bitcoin", "Ethereum"). Often has a free plan.</li>
+                        <li><strong>GNews API:</strong> Another general news API that can be filtered; offers a free tier for developers.</li>
+                        <li><strong>(Indirect) Twitter API:</strong> While direct free access to the full Twitter API has become restrictive, academic research accounts or limited free endpoints might be available for fetching tweets for sentiment analysis. Third-party libraries sometimes offer workarounds, but reliability can vary.</li>
+                        <li><strong>Reddit API:</strong> Can be used to fetch posts from relevant subreddits (e.g., r/CryptoCurrency, r/Bitcoin) for sentiment analysis. Subject to rate limits.</li>
+                    </ul>
+
+                    <h4 class="text-xl font-medium mt-4 mb-2 text-teal-700">3. Trade Execution (Buy/Sell Signals via Exchange APIs)</h4>
+                     <ul class="api-list text-gray-700">
+                        <li><strong>Binance API (Testnet):</strong> Crucial for an FYP. Allows placing/managing spot orders with virtual funds.</li>
+                        <li><strong>Bybit API (Testnet):</strong> Also supports placing/managing spot orders on their testnet environment.</li>
+                        <li><strong>Kraken API (Testnet - Futures Focus):</strong> Testnet primarily for futures; spot trading simulation via API needs careful verification for FYP needs.</li>
+                        <li><strong>Important Note:</strong> For an FYP, all "buy/sell" actions should be performed on the exchange's **Testnet** environment to avoid risking real money. The APIs are the same, but they connect to a simulated market.</li>
+                    </ul>
+
+                    <h4 class="text-xl font-medium mt-4 mb-2 text-teal-700">4. Accessing TradingView Indicators/Signals</h4>
+                    <p class="text-gray-700 mb-1">Directly accessing TradingView's proprietary indicators or their real-time values via a free, public API for programmatic use in a bot's core logic is **generally not available.** TradingView protects its indicator calculations. However, for an FYP, you can approach this in a few ways:</p>
+                    <ul class="api-list text-gray-700">
+                        <li><strong>Re-implement Indicators:</strong> The most common and recommended approach. Use Python libraries like `TA-Lib` or `Pandas-TA` to calculate standard indicators (SMAs, EMAs, RSI, MACD, Bollinger Bands, etc.) yourself within your bot's code. This gives you full control and understanding.</li>
+                        <li><strong>TradingView Alerts to Webhook:</strong> TradingView allows users to create alerts based on indicator conditions, price levels, or drawing tools. These alerts can be configured to send a POST request to a webhook URL. Your bot can expose an API endpoint (e.g., using Flask/FastAPI) to receive these webhook notifications and interpret them as trading signals. This is a popular method for "automating" TradingView strategies.
+                            <ul class="list-disc list-inside ml-6 text-sm text-gray-600">
+                                <li>Requires a TradingView account (free plan has limited alerts, paid plans offer more).</li>
+                                <li>Your bot's webhook receiver needs to be publicly accessible or use a tunneling service like ngrok during development.</li>
+                            </ul>
+                        </li>
+                        <li><strong>TradingView Lightweight Charts / Widgets:</strong> For the bot's **dashboard UI (e.g., built with Next.js)**, you can embed TradingView's Lightweight Charts or other widgets to display interactive charts. This is for visualization, not for feeding data into the bot's decision logic.</li>
+                        <li><strong>Third-Party Libraries/APIs (Use with Caution):</strong> Some unofficial libraries or services claim to scrape TradingView data or provide indicator values. These are often unreliable, may violate TradingView's terms of service, and can break without notice. They are generally not recommended for a serious FYP.</li>
+                    </ul>
+                    <p class="mt-3 text-sm text-gray-600">For an FYP, the most robust approach for indicators is to calculate them within your Python bot using established libraries. Using TradingView alerts via webhooks is a viable way to integrate signals derived from TradingView's charting interface if that's a specific project goal.</p>
+                </article>
             </div>
         </section>
 
@@ -374,10 +431,10 @@
                     <h3 class="text-2xl font-medium mb-3 text-[#008080]">B. Advanced Feature Engineering</h3>
                     <p class="mb-2 text-lg leading-relaxed">Beyond standard TAs, engineer features from:
                         <ul class="list-disc list-inside ml-4 text-gray-700">
-                            <li>Comparative metrics: Relative strength across coins.</li>
-                            <li>Graph-based features: From GNN analysis of coin relationships or transaction networks.</li>
-                            <li>NLP-derived features: Advanced sentiment, topic modeling from news/social specific to coins.</li>
-                            <li>On-chain analytics: Smart money movements, DeFi protocol health indicators.</li>
+                            <li>**Comparative metrics:** Relative strength across coins.</li>
+                            <li>**Graph-based features:** From GNN analysis of coin relationships or transaction networks.</li>
+                            <li>**NLP-derived features:** Advanced sentiment, topic modeling from news/social specific to coins.</li>
+                            <li>**On-chain analytics:** Smart money movements, DeFi protocol health indicators.</li>
                         </ul>
                     </p>
                 </article>
@@ -385,12 +442,12 @@
                     <h3 class="text-2xl font-medium mb-3 text-[#008080]">C. Cutting-Edge AI-Driven Decision Making</h3>
                     <p class="mb-2 text-lg leading-relaxed">Explore and implement more sophisticated AI models:</p>
                     <ul class="list-disc list-inside space-y-1 text-gray-700">
-                        <li>Transformer Models: For time-series forecasting (price, volatility) and advanced NLP tasks.</li>
-                        <li>Graph Neural Networks (GNNs): To model inter-coin relationships, detect anomalies in transaction networks, or predict coin performance based on network structure.</li>
-                        <li>Deep Reinforcement Learning (DRL) for Portfolio Management: Agents learning dynamic capital allocation and trading across multiple assets.</li>
-                        <li>Generative AI (LLMs): For strategy ideation by prompting models with market conditions, generating market summaries, or even assisting in code generation for strategy components. Consider Retrieval Augmented Generation (RAG) for LLMs to use real-time data.</li>
-                        <li>Causal Inference Models: Attempt to identify causal drivers of price movements, aiming for more robust strategies than correlation-based ones (highly research-oriented).</li>
-                        <li>Explainable AI (XAI): Integrate techniques like SHAP, LIME, or attention visualization to understand and explain AI model decisions, crucial for an advanced FYP.</li>
+                        <li>**Transformer Models:** For time-series forecasting (price, volatility) and advanced NLP tasks.</li>
+                        <li>**Graph Neural Networks (GNNs):** To model inter-coin relationships, detect anomalies in transaction networks, or predict coin performance based on network structure.</li>
+                        <li>**Deep Reinforcement Learning (DRL) for Portfolio Management:** Agents learning dynamic capital allocation and trading across multiple assets.</li>
+                        <li>**Generative AI (LLMs):** For strategy ideation by prompting models with market conditions, generating market summaries, or even assisting in code generation for strategy components. Consider Retrieval Augmented Generation (RAG) for LLMs to use real-time data.</li>
+                        <li>**Causal Inference Models:** Attempt to identify causal drivers of price movements, aiming for more robust strategies than correlation-based ones (highly research-oriented).</li>
+                        <li>**Explainable AI (XAI):** Integrate techniques like SHAP, LIME, or attention visualization to understand and explain AI model decisions, crucial for an advanced FYP.</li>
                     </ul>
                 </article>
             </div>
@@ -603,8 +660,6 @@
             event.preventDefault();
             const targetId = link.getAttribute('href');
             window.location.hash = targetId;
-            // Call navigateToSection directly on click as well,
-            // because hashchange might not fire if hash is already the target.
             navigateToSection(targetId);
         });
     });
@@ -681,7 +736,7 @@
         populateRoadmap();
         
         const initialHash = window.location.hash || '#introduction';
-        navigateToSection(initialHash); // Ensure correct section is shown on load
+        navigateToSection(initialHash); 
     });
 
     function wrapText(context) {
@@ -892,7 +947,7 @@
             `;
             
             const contentDiv = document.createElement('div');
-            contentDiv.className = 'collapsible-content p-4 border-t border-gray-200'; // Removed bg-white, inherits from card or can be set
+            contentDiv.className = 'collapsible-content p-4 border-t border-gray-200'; 
             
             let tasksHtml = '<h5 class="font-semibold text-gray-700 mb-1">Key Tasks:</h5><ul class="list-disc list-inside text-sm text-gray-600 space-y-1 mb-3">';
             phase.tasks.forEach(task => tasksHtml += `<li>${task}</li>`);
